@@ -52,5 +52,6 @@
 
 		<module>study/gojs</module>
 		<module>study/jsPlumb</module>
+		<module>study/mxgraph</module>
 	</modules>
 </project>

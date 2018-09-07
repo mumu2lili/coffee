@@ -22,7 +22,7 @@ public class MlController {
 	@RequestMapping(value = "editor", method = RequestMethod.GET)
 	public String editor(Map<String, Object> model, HttpServletRequest req, HttpServletResponse res) {
 
-		return "editor";
+		return "ml/editor";
 	}
 
 }

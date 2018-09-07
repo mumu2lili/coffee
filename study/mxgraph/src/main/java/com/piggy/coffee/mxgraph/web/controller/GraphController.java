@@ -19,4 +19,10 @@ public class GraphController {
 		return "graph/editor";
 	}
 
+	@RequestMapping(value = "toolbar", method = RequestMethod.GET)
+	public String toolbar(Map<String, Object> model, HttpServletRequest req, HttpServletResponse res) {
+
+		return "graph/toolbar";
+	}
+
 }

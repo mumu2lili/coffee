@@ -9,14 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * 机器学习
+ *
+ * @author mm
+ *
+ */
 @Controller
-@RequestMapping("graph")
-public class GraphController {
+@RequestMapping("ml")
+public class MlController {
 
 	@RequestMapping(value = "editor", method = RequestMethod.GET)
 	public String editor(Map<String, Object> model, HttpServletRequest req, HttpServletResponse res) {
 
-		return "graph/editor";
+		return "editor";
 	}
 
 }

@@ -7,6 +7,7 @@
 <body>
   <ul>
     <li><a href="${basePath}graph/editor">流程编辑</a></li>
+    <li><a href="${basePath}graph/editor">机器学习流程编辑</a></li>
   </ul>
 
 

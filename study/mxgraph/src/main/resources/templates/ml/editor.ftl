@@ -4,8 +4,8 @@
 <#assign title = "流程编辑" />
 <#include "/common/head.ftl">
 <script type="text/javascript">
-    RESOURCES_PATH="/mxgraph/grapheditor/resources"
-    STYLE_PATH="/mxgraph/grapheditor/styles"
+    RESOURCES_PATH="/mxgraph/ml/editor/resources"
+    STYLE_PATH="/mxgraph/ml/editor/styles"
 </script>
 <script type="text/javascript">
 		// Parses URL parameters. Supported parameters are:
@@ -36,26 +36,26 @@
 			return result;
 		})(window.location.href);
 	
-		// Default resources are included in grapheditor resources
+		// Default resources are included in ml/editor resources
 		mxLoadResources = false;
 </script>
-<link rel="stylesheet" type="text/css" href="${basePath}mxgraph/grapheditor/styles/grapheditor.css" />
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Init.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/deflate/pako.min.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/deflate/base64.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/jscolor/jscolor.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/sanitizer/sanitizer.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${basePath}mxgraph/ml/editor/styles/grapheditor.css" />
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Init.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/deflate/pako.min.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/deflate/base64.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/jscolor/jscolor.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/sanitizer/sanitizer.min.js"></script>
 <script type="text/JavaScript" src="${basePath}mxgraph/js/mxClient.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/EditorUi.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/editor.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Sidebar.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Graph.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Format.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Shapes.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Actions.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Menus.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Toolbar.js"></script>
-<script type="text/JavaScript" src="${basePath}mxgraph/grapheditor/js/Dialogs.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/EditorUi.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/editor.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Sidebar.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Graph.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Format.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Shapes.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Actions.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Menus.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Toolbar.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Dialogs.js"></script>
 </head>
 <body class="geEditor">
 <script type="text/javascript">

@@ -10,6 +10,8 @@
     
     <li><a href="${basePath}graph/editor">流程编辑</a></li>
     <li><a href="${basePath}graph/toolbar">动态工具栏</a></li>
+    
+    <li><a href="${basePath}js/global">js global</a></li>
   </ul>
 
 

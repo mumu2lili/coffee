@@ -6,6 +6,7 @@
 <script type="text/javascript">
     RESOURCES_PATH="/mxgraph/ml/editor/resources"
     STYLE_PATH="/mxgraph/ml/editor/styles"
+    STENCIL_PATH="/mxgraph/ml/editor/stencils"
 </script>
 <script type="text/javascript">
 		// Parses URL parameters. Supported parameters are:

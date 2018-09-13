@@ -57,6 +57,7 @@
 <script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Menus.js"></script>
 <script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Toolbar.js"></script>
 <script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/Dialogs.js"></script>
+<script type="text/JavaScript" src="${basePath}mxgraph/ml/editor/js/CustomDialogs.js"></script>
 </head>
 <body class="geEditor">
 <script type="text/javascript">

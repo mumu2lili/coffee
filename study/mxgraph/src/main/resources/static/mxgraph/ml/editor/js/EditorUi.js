@@ -3630,7 +3630,21 @@ EditorUi.prototype.showDataDialog = function(cell)
 {
 	if (cell != null)
 	{
-		var dlg = new EditDataDialog(this, cell);
+		// mluif 增加开始
+		var dlg = null;
+		var cellStyle = cell.style;
+		if(cellStyle.indexOf("componentType") >= 0) {
+			if(cellStyle.indexOf("singleTool") > 0) {
+				dlg = new SingleToolEditDataDialog(this, cell); 
+			} else if(cellStyle.indexOf("multiTool") > 0) {
+				dlg = new SingleToolEditDataDialog(this, cell);
+			} else {
+				mxUtils.alert("未知组件类型");
+			}	
+		} else {
+			dlg = new EditDataDialog(this, cell);
+		}
+		// mluif 增加结束
 		this.showDialog(dlg.container, 340, 340, true, false, null, false);
 		dlg.init();
 	}

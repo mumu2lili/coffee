@@ -918,6 +918,7 @@ Sidebar.prototype.addGeneralPalette = function(expand)
 	var lineTags = 'line lines connector connectors connection connections arrow arrows ';
 	
 	var fns = [
+		this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;componentType=singleTool;', 120, 60, '', '单工具组件', null, null, 'single component 组件'),
 	 	this.createVertexTemplateEntry('rounded=0;whiteSpace=wrap;html=1;', 120, 60, '', 'Rectangle', null, null, 'rect rectangle box'),
 	 	this.createVertexTemplateEntry('rounded=1;whiteSpace=wrap;html=1;', 120, 60, '', 'Rounded Rectangle', null, null, 'rounded rect rectangle box'),
 	 	// Explicit strokecolor/fillcolor=none is a workaround to maintain transparent background regardless of current style

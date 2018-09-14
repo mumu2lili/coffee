@@ -29,73 +29,6 @@ var SingleToolEditDataDialog = function(ui, cell)
 
 	var id = EditDataDialog.getDisplayIdForCell(ui, cell);
 	
-	// FIXME: Fix remove button for quirks mode
-	var addRemoveButton = function(text, name)
-	{
-		var wrapper = document.createElement('div');
-		wrapper.style.position = 'relative';
-		wrapper.style.paddingRight = '20px';
-		wrapper.style.boxSizing = 'border-box';
-		wrapper.style.width = '100%';
-		
-		var removeAttr = document.createElement('a');
-		var img = mxUtils.createImage(Dialog.prototype.closeImage);
-		img.style.height = '9px';
-		img.style.fontSize = '9px';
-		img.style.marginBottom = (mxClient.IS_IE11) ? '-1px' : '5px';
-		
-		removeAttr.className = 'geButton';
-		removeAttr.setAttribute('title', mxResources.get('delete'));
-		removeAttr.style.position = 'absolute';
-		removeAttr.style.top = '4px';
-		removeAttr.style.right = '0px';
-		removeAttr.style.margin = '0px';
-		removeAttr.style.width = '9px';
-		removeAttr.style.height = '9px';
-		removeAttr.style.cursor = 'pointer';
-		removeAttr.appendChild(img);
-		
-		var removeAttrFn = (function(name)
-		{
-			return function()
-			{
-				var count = 0;
-				
-				for (var j = 0; j < names.length; j++)
-				{
-					if (names[j] == name)
-					{
-						texts[j] = null;
-						form.table.deleteRow(count + ((id != null) ? 1 : 0));
-						
-						break;
-					}
-					
-					if (texts[j] != null)
-					{
-						count++;
-					}
-				}
-			};
-		})(name);
-		
-		mxEvent.addListener(removeAttr, 'click', removeAttrFn);
-		
-		var parent = text.parentNode;
-		wrapper.appendChild(text);
-		wrapper.appendChild(removeAttr);
-		parent.appendChild(wrapper);
-	};
-	
-	var addTextArea = function(index, name, value)
-	{
-		names[index] = name;
-		texts[index] = form.addTextarea(names[count] + ':', value, 2);
-		texts[index].style.width = '100%';
-		
-		addRemoveButton(texts[index], name);
-	};
-	
 	var temp = [];
 	var isLayer = graph.getModel().getParent(cell) == graph.getModel().getRoot();
 
@@ -127,7 +60,7 @@ var SingleToolEditDataDialog = function(ui, cell)
 	if (id != null)
 	{	
 		var text = document.createElement('input');
-		text.style.width = '280px';
+		text.style.width = '220px';
 		text.style.textAlign = 'center';
 		text.setAttribute('type', 'text');
 		text.setAttribute('readOnly', 'true');
@@ -136,9 +69,82 @@ var SingleToolEditDataDialog = function(ui, cell)
 		form.addField(mxResources.get('id') + ':', text);
 	}
 	
+	// 业务数据界面
+	var generateUi = function(name, resData)
+	{
+			try
+			{
+					// Checks if the name is valid
+					var clone = value.cloneNode(false);
+					clone.setAttribute(name, '');
+
+					names.push(name);
+					var text = form.addCombo(nameLabel[name] + ':', false);
+					$(text).attr("name", name);
+					for(var i = 0; i < resData.datas.length; i++) {
+						var data = resData.datas[i];
+						form.addOption(text, data.key, data.value, i == 0);
+					}
+					if(resData.defaultVal) {
+						$(text).find("option:selected").attr("selected",false);
+						$(text).find("option[value='" + resData.defaultVal + "']").attr("selected",true);
+					}
+					text.style.width = '100%';
+					texts.push(text);
+					text.focus();
+			}
+			catch (e)
+			{
+				mxUtils.alert(e);
+			}
+	};
+	var nameLabel = {
+			"componentType": "组件类型",
+			"toolChoose": "工具选择"
+	}
+	var resData = {
+			"datas": [
+				{
+					"key": "边界模块1",
+					"value": "InerComponent1"
+				}, {
+					"key": "边界模块2",
+					"value": "InerComponent2"
+				}
+			],
+			"defaultVal": "InerComponent1"
+	};
+	generateUi("componentType", resData);
+	resData = {
+			"datas": [
+				{
+					"key": "工具1",
+					"value": "Classify_Report"
+				}, {
+					"key": "工具2",
+					"value": "Vectorize"
+				}, {
+					"key": "工具3",
+					"value": "Ansj_WordSeg"
+				}
+			],
+			"defaultVal": "Vectorize"
+	};
+	generateUi("toolChoose", resData);
+	
+	// 恢复数据
+	var setData = function(index, name, value)
+	{
+		names[index] = name;
+		var selectField = $("select[name='" + name + "']", form.getTable()).get(0);
+		$(selectField).find("option:selected").attr("selected",false);
+		$(selectField).find("option[value='" + value + "']").attr("selected",true);
+		texts[index] = selectField;
+		
+	};
 	for (var i = 0; i < temp.length; i++)
 	{
-		addTextArea(count, temp[i].name, temp[i].value);
+		setData(count, temp[i].name, temp[i].value);
 		count++;
 	}
 	
@@ -150,64 +156,8 @@ var SingleToolEditDataDialog = function(ui, cell)
 	newProp.style.whiteSpace = 'nowrap';
 	newProp.style.marginTop = '6px';
 
-	var nameInput = document.createElement('input');
-	nameInput.setAttribute('placeholder', mxResources.get('enterPropertyName'));
-	nameInput.setAttribute('type', 'text');
-	nameInput.setAttribute('size', (mxClient.IS_IE || mxClient.IS_IE11) ? '18' : '22');
-	nameInput.style.marginLeft = '2px';
-
-	newProp.appendChild(nameInput);
 	top.appendChild(newProp);
 	div.appendChild(top);
-	
-	var addBtn = mxUtils.button(mxResources.get('addProperty'), function()
-	{
-		var name = nameInput.value;
-
-		// Avoid ':' in attribute names which seems to be valid in Chrome
-		if (name.length > 0 && name != 'label' && name != 'placeholders' && name.indexOf(':') < 0)
-		{
-			try
-			{
-				var idx = mxUtils.indexOf(names, name);
-				
-				if (idx >= 0 && texts[idx] != null)
-				{
-					texts[idx].focus();
-				}
-				else
-				{
-					// Checks if the name is valid
-					var clone = value.cloneNode(false);
-					clone.setAttribute(name, '');
-					
-					if (idx >= 0)
-					{
-						names.splice(idx, 1);
-						texts.splice(idx, 1);
-					}
-
-					names.push(name);
-					var text = form.addTextarea(name + ':', '', 2);
-					text.style.width = '100%';
-					texts.push(text);
-					addRemoveButton(text, name);
-
-					text.focus();
-				}
-
-				nameInput.value = '';
-			}
-			catch (e)
-			{
-				mxUtils.alert(e);
-			}
-		}
-		else
-		{
-			mxUtils.alert(mxResources.get('invalidName'));
-		}
-	});
 	
 	this.init = function()
 	{
@@ -215,17 +165,8 @@ var SingleToolEditDataDialog = function(ui, cell)
 		{
 			texts[0].focus();
 		}
-		else
-		{
-			nameInput.focus();
-		}
 	};
 	
-	addBtn.setAttribute('disabled', 'disabled');
-	addBtn.style.marginLeft = '10px';
-	addBtn.style.width = '144px';
-	newProp.appendChild(addBtn);
-
 	var cancelBtn = mxUtils.button(mxResources.get('cancel'), function()
 	{
 		ui.hideDialog.apply(ui, arguments);
@@ -272,23 +213,6 @@ var SingleToolEditDataDialog = function(ui, cell)
 		}
 	});
 	applyBtn.className = 'geBtn gePrimaryBtn';
-	
-	function updateAddBtn()
-	{
-		if (nameInput.value.length > 0)
-		{
-			addBtn.removeAttribute('disabled');
-		}
-		else
-		{
-			addBtn.setAttribute('disabled', 'disabled');
-		}
-	};
-
-	mxEvent.addListener(nameInput, 'keyup', updateAddBtn);
-	
-	// Catches all changes that don't fire a keyup (such as paste via mouse)
-	mxEvent.addListener(nameInput, 'change', updateAddBtn);
 	
 	var buttons = document.createElement('div');
 	buttons.style.cssText = 'position:absolute;left:30px;right:30px;text-align:right;bottom:30px;height:40px;'

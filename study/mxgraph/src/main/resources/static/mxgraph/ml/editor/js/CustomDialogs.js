@@ -174,8 +174,14 @@ var SingleToolEditDataDialog = function(ui, cell)
 	
 	cancelBtn.className = 'geBtn';
 	
-	var applyBtn = mxUtils.button(mxResources.get('apply'), function()
-	{
+	var generateCellLabel = function() {
+		var label = "<ul>" +
+				"<li>" + texts[0].value + "</li>" +
+				"<li>" + texts[1].value + "</li>" +
+				"</ul>";
+		return label;
+	};
+	var setCellValue = function() {
 		try
 		{
 			ui.hideDialog.apply(ui, arguments);
@@ -204,14 +210,20 @@ var SingleToolEditDataDialog = function(ui, cell)
 				value.removeAttribute('label');
 			}
 			
+			var label = generateCellLabel();
+			value.setAttribute("label", label);
+			
 			// Updates the value of the cell (undoable)
-			graph.getModel().setValue(cell, value);
+			graph.getModel().setValue(cell, value);		
 		}
 		catch (e)
 		{
 			mxUtils.alert(e);
 		}
-	});
+	}
+	setCellValue();
+	
+	var applyBtn = mxUtils.button(mxResources.get('apply'), setCellValue);
 	applyBtn.className = 'geBtn gePrimaryBtn';
 	
 	var buttons = document.createElement('div');

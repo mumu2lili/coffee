@@ -176,8 +176,8 @@ var SingleToolEditDataDialog = function(ui, cell)
 	
 	var generateCellLabel = function() {
 		var label = "<ul>" +
-				"<li>" + texts[0].value + "</li>" +
-				"<li>" + texts[1].value + "</li>" +
+				"<li style='list-style:none'>" + "类型：" + texts[0].value + "</li>" +
+				"<li style='list-style:none'>" + "工具：" + texts[1].value + "</li>" +
 				"</ul>";
 		return label;
 	};

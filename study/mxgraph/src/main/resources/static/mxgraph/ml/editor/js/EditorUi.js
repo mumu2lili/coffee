@@ -3507,8 +3507,24 @@ EditorUi.prototype.save = function(name)
 			{
 				if (xml.length < MAX_REQUEST_SIZE)
 				{
-					new mxXmlRequest(SAVE_URL, 'filename=' + encodeURIComponent(name) +
-						'&xml=' + encodeURIComponent(xml)).simulate(document, '_blank');
+					// 由模拟form 表单提交，改成ajax 提交
+					var params = {
+						'filename': encodeURIComponent(name),
+					    'xml': encodeURIComponent(xml),
+					}
+					$.ajax({ 
+						url: SAVE_URL, 
+						data: JSON.stringify(params),
+						contentType: "application/json; charset=utf-8",
+						type: 'POST',
+						async: false,
+						success: function(){
+							mxUtils.alert("保存成功");
+				        },
+				        error: function(){
+				        	throw "保存失败";
+				        },
+					});
 				}
 				else
 				{

@@ -4,6 +4,8 @@
 <#assign title = "流程编辑" />
 <#include "/common/head.ftl">
 <script type="text/javascript">
+    SAVE_URL = "/ml/save"
+    OPEN_URL = "/mxgraph/ml/editor/open.html"
     RESOURCES_PATH="/mxgraph/ml/editor/resources"
     STYLE_PATH="/mxgraph/ml/editor/styles"
     STENCIL_PATH="/mxgraph/ml/editor/stencils"

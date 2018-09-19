@@ -9,6 +9,7 @@
     RESOURCES_PATH="/mxgraph/ml/editor/resources"
     STYLE_PATH="/mxgraph/ml/editor/styles"
     STENCIL_PATH="/mxgraph/ml/editor/stencils"
+    OPEN_FORM = "/mxgraph/ml/editor/open.html"
 </script>
 <script type="text/javascript">
 		// Parses URL parameters. Supported parameters are:

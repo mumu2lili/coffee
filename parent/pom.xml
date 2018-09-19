@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.14.RELEASE</version>
-		<relativePath/>
+		<relativePath />
 	</parent>
 
 	<groupId>com.piggy.coffee</groupId>
@@ -36,6 +38,7 @@
 		<mysql.version>6.0.5</mysql.version>
 		<!-- tool -->
 		<commons-lang3.version>3.7</commons-lang3.version>
+		<commons-io.version>2.6</commons-io.version>
 		<commons-fileupload.version>1.3.2</commons-fileupload.version>
 		<!-- log -->
 		<log4j.version>1.2.17</log4j.version>
@@ -50,7 +53,7 @@
 		<surefire.version>2.18.1</surefire.version>
 		<plantuml.version>6121</plantuml.version>
 		<ant.version>1.8.4</ant.version>
-		<includedTestGroups/>
+		<includedTestGroups />
 		<excludedTestGroups>Integration,Acceptance,Live,WIP</excludedTestGroups>
 		<surefire.failIfNoSpecifiedTests>false</surefire.failIfNoSpecifiedTests>
 	</properties>
@@ -96,6 +99,12 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
 			</dependency>
 
 			<dependency>
@@ -216,7 +225,7 @@
 						<quiet>true</quiet>
 						<aggregate>false</aggregate>
 						<failOnError>false</failOnError>
-						<detectLinks/>
+						<detectLinks />
 						<tags>
 							<tag>
 								<name>todo</name>
@@ -359,7 +368,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -372,7 +381,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -385,7 +394,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -398,7 +407,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -411,7 +420,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -425,7 +434,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -438,7 +447,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -451,7 +460,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -468,7 +477,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<!-- This is suggested if Eclipse runs too many incremental maven 
@@ -491,7 +500,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore/>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -519,7 +528,7 @@
 					</filesets>
 				</configuration>
 			</plugin>
-			
+
 			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>buildnumber-maven-plugin</artifactId> 
 				<executions> <execution> <phase>validate</phase> <goals> <goal>create</goal> 
 				</goals> </execution> </executions> </plugin> -->
@@ -544,7 +553,7 @@
 								<requireMavenVersion>
 									<version>[3.0.0,)</version>
 								</requireMavenVersion>
-								<dependencyConvergence/>
+								<dependencyConvergence />
 							</rules>
 						</configuration>
 					</execution>
@@ -597,13 +606,13 @@
 									<xpath>/classpath/classpathentry[@path='src/main/resources' and
 										@kind='src' and @excluding='**']/@excluding</xpath>
 									<token>**</token>
-									<value/>
+									<value />
 								</replacement>
 								<replacement>
 									<xpath>/classpath/classpathentry[@path='src/test/resources' and
 										@kind='src' and @excluding='**']/@excluding</xpath>
 									<token>**</token>
-									<value/>
+									<value />
 								</replacement>
 							</replacements>
 						</configuration>
@@ -771,7 +780,7 @@
 							<author>false</author>
 							<quiet>true</quiet>
 							<aggregate>false</aggregate>
-							<detectLinks/>
+							<detectLinks />
 							<tags>
 								<tag>
 									<name>todo</name>
@@ -891,7 +900,7 @@
 								</goals>
 								<configuration>
 									<forceCreation>true</forceCreation>
-									<archive combine.self="override"/>
+									<archive combine.self="override" />
 								</configuration>
 							</execution>
 						</executions>
@@ -1102,24 +1111,33 @@
 								<phase>process-test-classes</phase>
 								<configuration>
 									<target>
-										<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath"/>
-										<taskdef resource="tasks.properties" classpathref="maven.plugin.classpath"/>
+										<taskdef
+											resource="net/sf/antcontrib/antcontrib.properties"
+											classpathref="maven.plugin.classpath" />
+										<taskdef resource="tasks.properties"
+											classpathref="maven.plugin.classpath" />
 										<if>
-											<available property="gogocobertura" file="target/test-classes"/>
+											<available property="gogocobertura"
+												file="target/test-classes" />
 											<then>
-												<echo message="INSTRUMENTING CLASSES FOR COBERTURA"/>
+												<echo message="INSTRUMENTING CLASSES FOR COBERTURA" />
 												<!-- Ensure any and all bits of our project are copied in first -->
 												<copy todir="target/cobertura/coverage-classes">
-													<fileset erroronmissingdir="false" dir="target/classes"/>
+													<fileset erroronmissingdir="false"
+														dir="target/classes" />
 												</copy>
-												<cobertura-instrument datafile="target/cobertura/cobertura.ser" todir="target/test-classes">
-													<fileset erroronmissingdir="false" dir="target/classes">
-														<include name="brooklyn/**/*.class"/>
-														<exclude name="brooklyn/**/*Test.class"/>
+												<cobertura-instrument
+													datafile="target/cobertura/cobertura.ser"
+													todir="target/test-classes">
+													<fileset erroronmissingdir="false"
+														dir="target/classes">
+														<include name="brooklyn/**/*.class" />
+														<exclude name="brooklyn/**/*Test.class" />
 													</fileset>
-													<fileset erroronmissingdir="false" dir="target/cobertura/dependency-classes">
-														<include name="brooklyn/**/*.class"/>
-														<exclude name="brooklyn/**/*Test.class"/>
+													<fileset erroronmissingdir="false"
+														dir="target/cobertura/dependency-classes">
+														<include name="brooklyn/**/*.class" />
+														<exclude name="brooklyn/**/*Test.class" />
 													</fileset>
 												</cobertura-instrument>
 											</then>
@@ -1135,19 +1153,31 @@
 								<phase>post-integration-test</phase>
 								<configuration>
 									<target>
-										<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath"/>
-										<taskdef resource="tasks.properties" classpathref="maven.plugin.classpath"/>
+										<taskdef
+											resource="net/sf/antcontrib/antcontrib.properties"
+											classpathref="maven.plugin.classpath" />
+										<taskdef resource="tasks.properties"
+											classpathref="maven.plugin.classpath" />
 										<if>
-											<available property="gogocobertura" file="target/cobertura/cobertura.ser"/>
+											<available property="gogocobertura"
+												file="target/cobertura/cobertura.ser" />
 											<then>
-												<echo message="GENERATING COBERTURA COVERAGE REPORT"/>
-												<cobertura-report format="xml" destdir="target/site/cobertura" datafile="target/cobertura/cobertura.ser">
-													<fileset erroronmissingdir="false" dir="src/main/java"/>
-													<fileset erroronmissingdir="false" dir="target/cobertura/dependency-sources"/>
+												<echo message="GENERATING COBERTURA COVERAGE REPORT" />
+												<cobertura-report format="xml"
+													destdir="target/site/cobertura"
+													datafile="target/cobertura/cobertura.ser">
+													<fileset erroronmissingdir="false"
+														dir="src/main/java" />
+													<fileset erroronmissingdir="false"
+														dir="target/cobertura/dependency-sources" />
 												</cobertura-report>
-												<cobertura-report format="html" destdir="target/site/cobertura" datafile="target/cobertura/cobertura.ser">
-													<fileset erroronmissingdir="false" dir="src/main/java"/>
-													<fileset erroronmissingdir="false" dir="target/cobertura/dependency-sources"/>
+												<cobertura-report format="html"
+													destdir="target/site/cobertura"
+													datafile="target/cobertura/cobertura.ser">
+													<fileset erroronmissingdir="false"
+														dir="src/main/java" />
+													<fileset erroronmissingdir="false"
+														dir="target/cobertura/dependency-sources" />
 												</cobertura-report>
 											</then>
 										</if>
@@ -1411,10 +1441,10 @@
 		</repository>
 	</repositories>
 
-	<pluginRepositories/>
+	<pluginRepositories />
 
 
-  <modules>
-    <module>jwt</module>
-  </modules>
+	<modules>
+		<module>jwt</module>
+	</modules>
 </project>

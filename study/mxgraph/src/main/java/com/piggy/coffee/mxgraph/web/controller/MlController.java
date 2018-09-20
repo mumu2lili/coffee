@@ -19,6 +19,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.mxgraph.io.mxCodec;
+import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxIGraphModel;
 import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.view.mxGraph;
@@ -72,7 +73,15 @@ public class MlController {
 		dec.decode(e, graph.getModel());
 
 		mxIGraphModel model = graph.getModel();
-		System.out.println(model);
+
+		int n = model.getChildCount(model.getRoot());
+
+		for (int i = 0; i < n; i++) {
+			mxCell cell = (mxCell) model.getChildAt(model.getRoot(), i);
+			System.out.println(cell.getId());
+		}
+
+		System.out.println(n);
 
 	}
 

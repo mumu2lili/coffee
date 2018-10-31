@@ -45,7 +45,7 @@ public class URLDecoderTest {
 	}
 
 	@Test
-	public void test3() throws UnsupportedEncodingException {
+	public void test3_plus_blank() throws UnsupportedEncodingException {
 		String src = "a b+";
 
 		String xml = URLEncoder.encode(src, "UTF-8");

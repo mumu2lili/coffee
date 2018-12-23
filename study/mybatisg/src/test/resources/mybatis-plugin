@@ -1,0 +1,2 @@
+#项目目录下
+mvn mybatis-generator:generate

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jianyun.saas.mapper.WxParamMapper" >
+  <resultMap id="BaseResultMap" type="com.jianyun.saas.model.WxParam" >
+    <result column="PARAM_ID" property="paramId" jdbcType="VARCHAR" />
+    <result column="COMPONENT_ID" property="componentId" jdbcType="VARCHAR" />
+    <result column="MP_ID" property="mpId" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="VAL" property="val" jdbcType="VARCHAR" />
+    <result column="EXPIRE_TIME" property="expireTime" jdbcType="NUMERIC" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="INPUT_DATE" property="inputDate" jdbcType="VARCHAR" />
+    <result column="INPUT_TIME" property="inputTime" jdbcType="VARCHAR" />
+    <result column="TM_SMP" property="tmSmp" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.jianyun.saas.model.WxParam" >
+    insert into WX_PARAM (PARAM_ID, COMPONENT_ID, MP_ID, 
+      CODE, VAL, EXPIRE_TIME, 
+      CREATE_TIME, STATUS, INPUT_DATE, 
+      INPUT_TIME, TM_SMP)
+    values (#{paramId,jdbcType=VARCHAR}, #{componentId,jdbcType=VARCHAR}, #{mpId,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{val,jdbcType=VARCHAR}, #{expireTime,jdbcType=NUMERIC}, 
+      #{createTime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{inputDate,jdbcType=VARCHAR}, 
+      #{inputTime,jdbcType=VARCHAR}, #{tmSmp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jianyun.saas.model.WxParam" >
+    insert into WX_PARAM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramId != null" >
+        PARAM_ID,
+      </if>
+      <if test="componentId != null" >
+        COMPONENT_ID,
+      </if>
+      <if test="mpId != null" >
+        MP_ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="val != null" >
+        VAL,
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="inputDate != null" >
+        INPUT_DATE,
+      </if>
+      <if test="inputTime != null" >
+        INPUT_TIME,
+      </if>
+      <if test="tmSmp != null" >
+        TM_SMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramId != null" >
+        #{paramId,jdbcType=VARCHAR},
+      </if>
+      <if test="componentId != null" >
+        #{componentId,jdbcType=VARCHAR},
+      </if>
+      <if test="mpId != null" >
+        #{mpId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="val != null" >
+        #{val,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="inputDate != null" >
+        #{inputDate,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null" >
+        #{inputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null" >
+        #{tmSmp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jianyun.saas.mapper.WxComponentMapper" >
+  <resultMap id="BaseResultMap" type="com.jianyun.saas.model.WxComponent" >
+    <result column="COMPONENT_ID" property="componentId" jdbcType="VARCHAR" />
+    <result column="COMPONENT_APPID" property="componentAppid" jdbcType="VARCHAR" />
+    <result column="COMPONENT_APPSECRET" property="componentAppsecret" jdbcType="VARCHAR" />
+    <result column="ENCODING_AESKEY" property="encodingAeskey" jdbcType="VARCHAR" />
+    <result column="ENCODING_AESKEY_NEW" property="encodingAeskeyNew" jdbcType="VARCHAR" />
+    <result column="MSG_VERIFY_TOKEN" property="msgVerifyToken" jdbcType="VARCHAR" />
+    <result column="INPUT_DATE" property="inputDate" jdbcType="VARCHAR" />
+    <result column="INPUT_TIME" property="inputTime" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="TM_SMP" property="tmSmp" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.jianyun.saas.model.WxComponent" >
+    insert into WX_COMPONENT (COMPONENT_ID, COMPONENT_APPID, COMPONENT_APPSECRET, 
+      ENCODING_AESKEY, ENCODING_AESKEY_NEW, MSG_VERIFY_TOKEN, 
+      INPUT_DATE, INPUT_TIME, STATUS, 
+      TM_SMP)
+    values (#{componentId,jdbcType=VARCHAR}, #{componentAppid,jdbcType=VARCHAR}, #{componentAppsecret,jdbcType=VARCHAR}, 
+      #{encodingAeskey,jdbcType=VARCHAR}, #{encodingAeskeyNew,jdbcType=VARCHAR}, #{msgVerifyToken,jdbcType=VARCHAR}, 
+      #{inputDate,jdbcType=VARCHAR}, #{inputTime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{tmSmp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jianyun.saas.model.WxComponent" >
+    insert into WX_COMPONENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="componentId != null" >
+        COMPONENT_ID,
+      </if>
+      <if test="componentAppid != null" >
+        COMPONENT_APPID,
+      </if>
+      <if test="componentAppsecret != null" >
+        COMPONENT_APPSECRET,
+      </if>
+      <if test="encodingAeskey != null" >
+        ENCODING_AESKEY,
+      </if>
+      <if test="encodingAeskeyNew != null" >
+        ENCODING_AESKEY_NEW,
+      </if>
+      <if test="msgVerifyToken != null" >
+        MSG_VERIFY_TOKEN,
+      </if>
+      <if test="inputDate != null" >
+        INPUT_DATE,
+      </if>
+      <if test="inputTime != null" >
+        INPUT_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="tmSmp != null" >
+        TM_SMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="componentId != null" >
+        #{componentId,jdbcType=VARCHAR},
+      </if>
+      <if test="componentAppid != null" >
+        #{componentAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="componentAppsecret != null" >
+        #{componentAppsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="encodingAeskey != null" >
+        #{encodingAeskey,jdbcType=VARCHAR},
+      </if>
+      <if test="encodingAeskeyNew != null" >
+        #{encodingAeskeyNew,jdbcType=VARCHAR},
+      </if>
+      <if test="msgVerifyToken != null" >
+        #{msgVerifyToken,jdbcType=VARCHAR},
+      </if>
+      <if test="inputDate != null" >
+        #{inputDate,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null" >
+        #{inputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null" >
+        #{tmSmp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

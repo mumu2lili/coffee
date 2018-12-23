@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jianyun.saas.mapper.UsrWestrecipeRefundMapper" >
+  <resultMap id="BaseResultMap" type="com.jianyun.saas.model.UsrWestrecipeRefund" >
+    <id column="STOCK_ID" property="stockId" jdbcType="VARCHAR" />
+    <id column="WESTREFUND_ID" property="westrefundId" jdbcType="VARCHAR" />
+    <result column="RECIPEREL_ID" property="reciperelId" jdbcType="VARCHAR" />
+    <result column="RECIPE_ID" property="recipeId" jdbcType="VARCHAR" />
+    <result column="MED_ID" property="medId" jdbcType="VARCHAR" />
+    <result column="MED_NM" property="medNm" jdbcType="VARCHAR" />
+    <result column="MED_PRICE" property="medPrice" jdbcType="NUMERIC" />
+    <result column="MED_NUM" property="medNum" jdbcType="NUMERIC" />
+    <result column="REFUND_NUM" property="refundNum" jdbcType="NUMERIC" />
+    <result column="RECOVERY_NUM" property="recoveryNum" jdbcType="NUMERIC" />
+    <result column="TOTAL_PRICE" property="totalPrice" jdbcType="NUMERIC" />
+    <result column="MED_METHOD" property="medMethod" jdbcType="VARCHAR" />
+    <result column="USE_LEVEL" property="useLevel" jdbcType="NUMERIC" />
+    <result column="USE_FREQUENCY" property="useFrequency" jdbcType="VARCHAR" />
+    <result column="USE_DATE" property="useDate" jdbcType="VARCHAR" />
+    <result column="MED_FORM" property="medForm" jdbcType="VARCHAR" />
+    <result column="PRODUCT_PLACE" property="productPlace" jdbcType="VARCHAR" />
+    <result column="MED_SPEC" property="medSpec" jdbcType="VARCHAR" />
+    <result column="MED_UNIT" property="medUnit" jdbcType="VARCHAR" />
+    <result column="TM_SMP" property="tmSmp" jdbcType="VARCHAR" />
+    <result column="DISCOUNT" property="discount" jdbcType="NUMERIC" />
+    <result column="DISCOUNT_PRICE" property="discountPrice" jdbcType="NUMERIC" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    STOCK_ID, WESTREFUND_ID, RECIPEREL_ID, RECIPE_ID, MED_ID, MED_NM, MED_PRICE, MED_NUM, 
+    REFUND_NUM, RECOVERY_NUM, TOTAL_PRICE, MED_METHOD, USE_LEVEL, USE_FREQUENCY, USE_DATE, 
+    MED_FORM, PRODUCT_PLACE, MED_SPEC, MED_UNIT, TM_SMP, DISCOUNT, DISCOUNT_PRICE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.jianyun.saas.model.UsrWestrecipeRefundKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from USR_WESTRECIPE_REFUND
+    where STOCK_ID = #{stockId,jdbcType=VARCHAR}
+      and WESTREFUND_ID = #{westrefundId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jianyun.saas.model.UsrWestrecipeRefundKey" >
+    delete from USR_WESTRECIPE_REFUND
+    where STOCK_ID = #{stockId,jdbcType=VARCHAR}
+      and WESTREFUND_ID = #{westrefundId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jianyun.saas.model.UsrWestrecipeRefund" >
+    insert into USR_WESTRECIPE_REFUND (STOCK_ID, WESTREFUND_ID, RECIPEREL_ID, 
+      RECIPE_ID, MED_ID, MED_NM, 
+      MED_PRICE, MED_NUM, REFUND_NUM, 
+      RECOVERY_NUM, TOTAL_PRICE, MED_METHOD, 
+      USE_LEVEL, USE_FREQUENCY, USE_DATE, 
+      MED_FORM, PRODUCT_PLACE, MED_SPEC, 
+      MED_UNIT, TM_SMP, DISCOUNT, 
+      DISCOUNT_PRICE)
+    values (#{stockId,jdbcType=VARCHAR}, #{westrefundId,jdbcType=VARCHAR}, #{reciperelId,jdbcType=VARCHAR}, 
+      #{recipeId,jdbcType=VARCHAR}, #{medId,jdbcType=VARCHAR}, #{medNm,jdbcType=VARCHAR}, 
+      #{medPrice,jdbcType=NUMERIC}, #{medNum,jdbcType=NUMERIC}, #{refundNum,jdbcType=NUMERIC}, 
+      #{recoveryNum,jdbcType=NUMERIC}, #{totalPrice,jdbcType=NUMERIC}, #{medMethod,jdbcType=VARCHAR}, 
+      #{useLevel,jdbcType=NUMERIC}, #{useFrequency,jdbcType=VARCHAR}, #{useDate,jdbcType=VARCHAR}, 
+      #{medForm,jdbcType=VARCHAR}, #{productPlace,jdbcType=VARCHAR}, #{medSpec,jdbcType=VARCHAR}, 
+      #{medUnit,jdbcType=VARCHAR}, #{tmSmp,jdbcType=VARCHAR}, #{discount,jdbcType=NUMERIC}, 
+      #{discountPrice,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jianyun.saas.model.UsrWestrecipeRefund" >
+    insert into USR_WESTRECIPE_REFUND
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        STOCK_ID,
+      </if>
+      <if test="westrefundId != null" >
+        WESTREFUND_ID,
+      </if>
+      <if test="reciperelId != null" >
+        RECIPEREL_ID,
+      </if>
+      <if test="recipeId != null" >
+        RECIPE_ID,
+      </if>
+      <if test="medId != null" >
+        MED_ID,
+      </if>
+      <if test="medNm != null" >
+        MED_NM,
+      </if>
+      <if test="medPrice != null" >
+        MED_PRICE,
+      </if>
+      <if test="medNum != null" >
+        MED_NUM,
+      </if>
+      <if test="refundNum != null" >
+        REFUND_NUM,
+      </if>
+      <if test="recoveryNum != null" >
+        RECOVERY_NUM,
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE,
+      </if>
+      <if test="medMethod != null" >
+        MED_METHOD,
+      </if>
+      <if test="useLevel != null" >
+        USE_LEVEL,
+      </if>
+      <if test="useFrequency != null" >
+        USE_FREQUENCY,
+      </if>
+      <if test="useDate != null" >
+        USE_DATE,
+      </if>
+      <if test="medForm != null" >
+        MED_FORM,
+      </if>
+      <if test="productPlace != null" >
+        PRODUCT_PLACE,
+      </if>
+      <if test="medSpec != null" >
+        MED_SPEC,
+      </if>
+      <if test="medUnit != null" >
+        MED_UNIT,
+      </if>
+      <if test="tmSmp != null" >
+        TM_SMP,
+      </if>
+      <if test="discount != null" >
+        DISCOUNT,
+      </if>
+      <if test="discountPrice != null" >
+        DISCOUNT_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        #{stockId,jdbcType=VARCHAR},
+      </if>
+      <if test="westrefundId != null" >
+        #{westrefundId,jdbcType=VARCHAR},
+      </if>
+      <if test="reciperelId != null" >
+        #{reciperelId,jdbcType=VARCHAR},
+      </if>
+      <if test="recipeId != null" >
+        #{recipeId,jdbcType=VARCHAR},
+      </if>
+      <if test="medId != null" >
+        #{medId,jdbcType=VARCHAR},
+      </if>
+      <if test="medNm != null" >
+        #{medNm,jdbcType=VARCHAR},
+      </if>
+      <if test="medPrice != null" >
+        #{medPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="medNum != null" >
+        #{medNum,jdbcType=NUMERIC},
+      </if>
+      <if test="refundNum != null" >
+        #{refundNum,jdbcType=NUMERIC},
+      </if>
+      <if test="recoveryNum != null" >
+        #{recoveryNum,jdbcType=NUMERIC},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="medMethod != null" >
+        #{medMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="useLevel != null" >
+        #{useLevel,jdbcType=NUMERIC},
+      </if>
+      <if test="useFrequency != null" >
+        #{useFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="useDate != null" >
+        #{useDate,jdbcType=VARCHAR},
+      </if>
+      <if test="medForm != null" >
+        #{medForm,jdbcType=VARCHAR},
+      </if>
+      <if test="productPlace != null" >
+        #{productPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="medSpec != null" >
+        #{medSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="medUnit != null" >
+        #{medUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null" >
+        #{tmSmp,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=NUMERIC},
+      </if>
+      <if test="discountPrice != null" >
+        #{discountPrice,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jianyun.saas.model.UsrWestrecipeRefund" >
+    update USR_WESTRECIPE_REFUND
+    <set >
+      <if test="reciperelId != null" >
+        RECIPEREL_ID = #{reciperelId,jdbcType=VARCHAR},
+      </if>
+      <if test="recipeId != null" >
+        RECIPE_ID = #{recipeId,jdbcType=VARCHAR},
+      </if>
+      <if test="medId != null" >
+        MED_ID = #{medId,jdbcType=VARCHAR},
+      </if>
+      <if test="medNm != null" >
+        MED_NM = #{medNm,jdbcType=VARCHAR},
+      </if>
+      <if test="medPrice != null" >
+        MED_PRICE = #{medPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="medNum != null" >
+        MED_NUM = #{medNum,jdbcType=NUMERIC},
+      </if>
+      <if test="refundNum != null" >
+        REFUND_NUM = #{refundNum,jdbcType=NUMERIC},
+      </if>
+      <if test="recoveryNum != null" >
+        RECOVERY_NUM = #{recoveryNum,jdbcType=NUMERIC},
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE = #{totalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="medMethod != null" >
+        MED_METHOD = #{medMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="useLevel != null" >
+        USE_LEVEL = #{useLevel,jdbcType=NUMERIC},
+      </if>
+      <if test="useFrequency != null" >
+        USE_FREQUENCY = #{useFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="useDate != null" >
+        USE_DATE = #{useDate,jdbcType=VARCHAR},
+      </if>
+      <if test="medForm != null" >
+        MED_FORM = #{medForm,jdbcType=VARCHAR},
+      </if>
+      <if test="productPlace != null" >
+        PRODUCT_PLACE = #{productPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="medSpec != null" >
+        MED_SPEC = #{medSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="medUnit != null" >
+        MED_UNIT = #{medUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null" >
+        TM_SMP = #{tmSmp,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        DISCOUNT = #{discount,jdbcType=NUMERIC},
+      </if>
+      <if test="discountPrice != null" >
+        DISCOUNT_PRICE = #{discountPrice,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where STOCK_ID = #{stockId,jdbcType=VARCHAR}
+      and WESTREFUND_ID = #{westrefundId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jianyun.saas.model.UsrWestrecipeRefund" >
+    update USR_WESTRECIPE_REFUND
+    set RECIPEREL_ID = #{reciperelId,jdbcType=VARCHAR},
+      RECIPE_ID = #{recipeId,jdbcType=VARCHAR},
+      MED_ID = #{medId,jdbcType=VARCHAR},
+      MED_NM = #{medNm,jdbcType=VARCHAR},
+      MED_PRICE = #{medPrice,jdbcType=NUMERIC},
+      MED_NUM = #{medNum,jdbcType=NUMERIC},
+      REFUND_NUM = #{refundNum,jdbcType=NUMERIC},
+      RECOVERY_NUM = #{recoveryNum,jdbcType=NUMERIC},
+      TOTAL_PRICE = #{totalPrice,jdbcType=NUMERIC},
+      MED_METHOD = #{medMethod,jdbcType=VARCHAR},
+      USE_LEVEL = #{useLevel,jdbcType=NUMERIC},
+      USE_FREQUENCY = #{useFrequency,jdbcType=VARCHAR},
+      USE_DATE = #{useDate,jdbcType=VARCHAR},
+      MED_FORM = #{medForm,jdbcType=VARCHAR},
+      PRODUCT_PLACE = #{productPlace,jdbcType=VARCHAR},
+      MED_SPEC = #{medSpec,jdbcType=VARCHAR},
+      MED_UNIT = #{medUnit,jdbcType=VARCHAR},
+      TM_SMP = #{tmSmp,jdbcType=VARCHAR},
+      DISCOUNT = #{discount,jdbcType=NUMERIC},
+      DISCOUNT_PRICE = #{discountPrice,jdbcType=NUMERIC}
+    where STOCK_ID = #{stockId,jdbcType=VARCHAR}
+      and WESTREFUND_ID = #{westrefundId,jdbcType=VARCHAR}
+  </update>
+</mapper>

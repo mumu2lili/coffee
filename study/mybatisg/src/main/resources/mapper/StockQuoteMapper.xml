@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piggy.stock.quote.dao.StockQuoteMapper">
+	<resultMap id="BaseResultMap"
+		type="com.piggy.stock.quote.domain.StockQuote">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="exchange" property="exchange"
+			jdbcType="VARCHAR" />
+		<result column="board" property="board" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="opening" property="opening" jdbcType="DOUBLE" />
+		<result column="closing" property="closing" jdbcType="DOUBLE" />
+		<result column="low" property="low" jdbcType="DOUBLE" />
+		<result column="high" property="high" jdbcType="DOUBLE" />
+		<result column="trade_time" property="tradeTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, exchange, board, code, opening, closing, low, high, trade_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from stock_quote
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="select" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from stock_quote
+		where 1 = 1
+		<if test="id != null">
+			and id = #{id,jdbcType=BIGINT}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from stock_quote
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.piggy.stock.quote.domain.StockQuote">
+		insert into stock_quote (id, exchange, board,
+		code, opening, closing,
+		low, high, trade_time
+		)
+		values (#{id,jdbcType=BIGINT}, #{exchange,jdbcType=VARCHAR},
+		#{board,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR}, #{opening,jdbcType=DOUBLE}, #{closing,jdbcType=DOUBLE},
+		#{low,jdbcType=DOUBLE}, #{high,jdbcType=DOUBLE},
+		#{tradeTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.piggy.stock.quote.domain.StockQuote">
+		insert into stock_quote
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="exchange != null">
+				exchange,
+			</if>
+			<if test="board != null">
+				board,
+			</if>
+			<if test="code != null">
+				code,
+			</if>
+			<if test="opening != null">
+				opening,
+			</if>
+			<if test="closing != null">
+				closing,
+			</if>
+			<if test="low != null">
+				low,
+			</if>
+			<if test="high != null">
+				high,
+			</if>
+			<if test="tradeTime != null">
+				trade_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="exchange != null">
+				#{exchange,jdbcType=VARCHAR},
+			</if>
+			<if test="board != null">
+				#{board,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="opening != null">
+				#{opening,jdbcType=DOUBLE},
+			</if>
+			<if test="closing != null">
+				#{closing,jdbcType=DOUBLE},
+			</if>
+			<if test="low != null">
+				#{low,jdbcType=DOUBLE},
+			</if>
+			<if test="high != null">
+				#{high,jdbcType=DOUBLE},
+			</if>
+			<if test="tradeTime != null">
+				#{tradeTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.piggy.stock.quote.domain.StockQuote">
+		update stock_quote
+		<set>
+			<if test="exchange != null">
+				exchange = #{exchange,jdbcType=VARCHAR},
+			</if>
+			<if test="board != null">
+				board = #{board,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null">
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="opening != null">
+				opening = #{opening,jdbcType=DOUBLE},
+			</if>
+			<if test="closing != null">
+				closing = #{closing,jdbcType=DOUBLE},
+			</if>
+			<if test="low != null">
+				low = #{low,jdbcType=DOUBLE},
+			</if>
+			<if test="high != null">
+				high = #{high,jdbcType=DOUBLE},
+			</if>
+			<if test="tradeTime != null">
+				trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.piggy.stock.quote.domain.StockQuote">
+		update stock_quote
+		set exchange = #{exchange,jdbcType=VARCHAR},
+		board = #{board,jdbcType=VARCHAR},
+		code = #{code,jdbcType=VARCHAR},
+		opening = #{opening,jdbcType=DOUBLE},
+		closing = #{closing,jdbcType=DOUBLE},
+		low = #{low,jdbcType=DOUBLE},
+		high = #{high,jdbcType=DOUBLE},
+		trade_time = #{tradeTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -26,7 +26,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
-		<table tableName="USR_WESTRECIPE_REFUND" domainObjectName="UsrWestrecipeRefund"
+		<table tableName="CUST_ONLINE_REGISTER" domainObjectName="CustOnlineRegister"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

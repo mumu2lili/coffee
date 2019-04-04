@@ -12,7 +12,7 @@ import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import okhttp3.Response;
 
-public class ExecTest3 extends ClientTest {
+public class ExecTest4 extends ClientTest {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Test
@@ -32,8 +32,10 @@ public class ExecTest3 extends ClientTest {
 			manager.init();
 			// 要不得
 			ExecWatch watch = client.pods().inNamespace("default").withName("mypoda").redirectingInput()
-					.redirectingOutput().redirectingError().withTTY().usingListener(new SimpleListener())
-					.exec("sh", scriptPth);
+					.redirectingOutput().redirectingError()
+					// .withTTY()
+					.usingListener(new SimpleListener())
+					.exec("sh", "timeout 100 " + scriptPth);
 			manager.putExecTime(watch, 10000);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(watch.getOutput()));
 			StringBuilder sb = new StringBuilder();

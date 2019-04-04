@@ -10,12 +10,13 @@ import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodList;
 import io.fabric8.kubernetes.client.Watch;
 import io.fabric8.kubernetes.client.Watcher;
+import io.fabric8.kubernetes.client.dsl.Deletable;
 import io.fabric8.kubernetes.client.dsl.FilterWatchListDeletable;
 
 public class PodTest extends ClientTest {
 
 	@Test
-	public void test() {
+	public void testLabel() {
 		Map<String, String> map = new HashMap<>();
 		map.put("a", "a");
 		Pod pod = this.getPod(map, map);
@@ -49,6 +50,24 @@ public class PodTest extends ClientTest {
 		} else {
 			return null;
 		}
+	}
+
+	@Test
+	public void testName() {
+		Pod pod = this.getPod("mypoda");
+		System.out.println(pod);
+	}
+
+	private Pod getPod(String podName) {
+
+		return client.pods().inNamespace("default").withName(podName).get();
+
+	}
+
+	@Test
+	public void testDelete() {
+		Deletable<Boolean> d = client.pods().inNamespace("default").withName("mypoda").withGracePeriod(0);
+		d.delete();
 	}
 
 }

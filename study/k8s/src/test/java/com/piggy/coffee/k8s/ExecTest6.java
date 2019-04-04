@@ -3,6 +3,8 @@ package com.piggy.coffee.k8s;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -12,17 +14,12 @@ import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import okhttp3.Response;
 
-public class ExecTest3 extends ClientTest {
+public class ExecTest6 extends ClientTest {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Test
 	public void test() {
-		this.test("/root/a.sh");
-	}
-
-	@Test
-	public void test2() {
-		this.test("/root/b.sh");
+		this.test("/data/workspace/myshixun_3689/evaluate.sh");
 	}
 
 	private void test(String scriptPth) {
@@ -30,12 +27,19 @@ public class ExecTest3 extends ClientTest {
 
 			ShellExecTimeManager manager = new ShellExecTimeManager();
 			manager.init();
-			// 要不得
-			ExecWatch watch = client.pods().inNamespace("default").withName("mypoda").redirectingInput()
-					.redirectingOutput().redirectingError().withTTY().usingListener(new SimpleListener())
-					.exec("sh", scriptPth);
-			manager.putExecTime(watch, 10000);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(watch.getOutput()));
+
+			PipedInputStream pis = new PipedInputStream();
+			PipedOutputStream pos = new PipedOutputStream(pis);
+
+			String ins = "\"IA==\"";
+			ins = "IA==,IA==";
+			ExecWatch watch = client.pods().inNamespace("default").withName("mypodb")
+					.readingInput(new PipedInputStream()).writingOutput(pos).withTTY()
+					.usingListener(new SimpleListener(pos))
+					.exec("bash", "-c", "bash " + scriptPth + " " + 3 + " " + ins);
+
+			manager.putExecTime(watch, 10);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(pis));
 			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -46,6 +50,7 @@ public class ExecTest3 extends ClientTest {
 			}
 
 			watch.close();
+			pis.close();
 
 		} catch (IOException e) {// 执行繁忙
 			log.error(e.getMessage(), e);
@@ -56,6 +61,13 @@ public class ExecTest3 extends ClientTest {
 	}
 
 	private class SimpleListener implements ExecListener {
+
+		private PipedOutputStream pos;
+
+		public SimpleListener(PipedOutputStream lock) {
+			super();
+			this.pos = lock;
+		}
 
 		@Override
 		public void onOpen(Response response) {
@@ -69,6 +81,22 @@ public class ExecTest3 extends ClientTest {
 
 		@Override
 		public void onClose(int code, String reason) {
+
+			try {
+				pos.flush();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					pos.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 			log.debug("close code {} reason {}", code, reason);
 		}
 	}

@@ -22,8 +22,7 @@ public class SampleController {
 		try {
 			Thread.sleep(3 * 1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// ignore quietly
 		}
 
 		log.info("收到请求 {}", content);

@@ -13,6 +13,7 @@ import java.util.concurrent.Future;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.ConnectionClosedException;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.entity.ContentType;
@@ -112,8 +113,12 @@ public class NioHttpClientUtils {
 			StringEntity entity = new StringEntity(data, contentType);
 			request.setEntity(entity);
 
+			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000) // 建立连接的超时时间,即三次握手的超时时间。
+					.setSocketTimeout(10000) // 请求数据传输的超时时间。
+					.setConnectionRequestTimeout(1000) // 从连接池获取连接的超时时间。
+					.build();
 			CloseableHttpAsyncClient httpclient = BridgeHttpAsyncClientBuilder.create()
-					.setBodyLength(entity.getContentLength()).build();
+					.setDefaultRequestConfig(requestConfig).setBodyLength(entity.getContentLength()).build();
 			httpclient.start();
 			Future<HttpResponse> future = httpclient.execute(request, new FutureCallback<HttpResponse>() {
 
@@ -158,7 +163,6 @@ public class NioHttpClientUtils {
 		}
 	}
 
-
 	/**
 	 * 向指定 URL 发送POST方法的请求
 	 *
@@ -190,8 +194,12 @@ public class NioHttpClientUtils {
 			StringEntity entity = new StringEntity(data, contentType);
 			request.setEntity(entity);
 
+			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(10000) // 建立连接的超时时间,即三次握手的超时时间。
+					.setSocketTimeout(10000) // 请求数据传输的超时时间。
+					.setConnectionRequestTimeout(1000) // 从连接池获取连接的超时时间。
+					.build();
 			CloseableHttpAsyncClient httpclient = BridgeHttpAsyncClientBuilder.create()
-					.setBodyLength(entity.getContentLength()).build();
+					.setDefaultRequestConfig(requestConfig).setBodyLength(entity.getContentLength()).build();
 			httpclient.start();
 			Future<HttpResponse> future = httpclient.execute(request, new FutureCallback<HttpResponse>() {
 
@@ -216,7 +224,7 @@ public class NioHttpClientUtils {
 				}
 			});
 
-			future.get();
+			// future.get();
 			while (httpclient.isRunning()) {
 
 			}

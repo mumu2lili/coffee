@@ -66,7 +66,13 @@ public class PodTest extends ClientTest {
 
 	@Test
 	public void testDelete() {
-		Deletable<Boolean> d = client.pods().inNamespace("default").withName("mypoda").withGracePeriod(0);
+		Deletable<Boolean> d = client.pods().inNamespace("default").withName("mypodb").withGracePeriod(0);
+		d.delete();
+	}
+
+	@Test
+	public void testDelete2() {
+		Deletable<Boolean> d = client.pods().inNamespace("default").withName("mypodb");
 		d.delete();
 	}
 

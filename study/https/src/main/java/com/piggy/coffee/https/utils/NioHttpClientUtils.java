@@ -12,6 +12,8 @@ import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.ConnectionClosedException;
+import org.apache.http.Consts;
+import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
@@ -109,7 +111,7 @@ public class NioHttpClientUtils {
 			data = data.substring(0, data.length() - 1);
 
 			log.debug("POST: " + url + " DATA: " + data);
-			ContentType contentType = ContentType.create("application/x-www-form-urlencoded");
+			ContentType contentType = ContentType.create("application/x-www-form-urlencoded", Consts.UTF_8);
 			StringEntity entity = new StringEntity(data, contentType);
 			request.setEntity(entity);
 

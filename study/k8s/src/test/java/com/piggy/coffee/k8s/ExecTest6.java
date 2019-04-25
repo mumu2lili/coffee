@@ -32,7 +32,7 @@ public class ExecTest6 extends ClientTest {
 			PipedOutputStream pos = new PipedOutputStream(pis);
 
 			String ins = "\"IA==\"";
-			ins = "IA==,IA==";
+			ins = "5aum5ailCjM1MDAK5aWzCjQ1LjUK5pyI55CD5bm/5a+S5a6rCuWQpg==";
 			ExecWatch watch = client.pods().inNamespace("default").withName("mypodb")
 					.readingInput(new PipedInputStream()).writingOutput(pos).withTTY()
 					.usingListener(new SimpleListener(pos))

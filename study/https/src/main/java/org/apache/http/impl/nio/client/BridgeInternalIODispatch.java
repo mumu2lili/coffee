@@ -1,7 +1,7 @@
 package org.apache.http.impl.nio.client;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +17,7 @@ public class BridgeInternalIODispatch extends InternalIODispatch {
 	 */
 	private long bodyLength = -1;
 	private CloseableHttpAsyncClient client;
-	private AtomicInteger times = new AtomicInteger(0);
+	private AtomicBoolean sendOver = new AtomicBoolean();
 
 	public BridgeInternalIODispatch(NHttpClientEventHandler handler, long entityLength,
 			CloseableHttpAsyncClient client) {
@@ -28,25 +28,26 @@ public class BridgeInternalIODispatch extends InternalIODispatch {
 
 	@Override
 	protected void onOutputReady(DefaultNHttpClientConnection conn) {
-		int count = 0;
 		if (conn instanceof BridgeManagedNHttpClientConnectionImpl) {
 			BridgeManagedNHttpClientConnectionImpl c = (BridgeManagedNHttpClientConnectionImpl) conn;
-			if (c.isRequestNotSendComplete()) {// 需要发送数据
-				count = times.incrementAndGet();
+			boolean encoderNotCompleted = c.getContentEncoder() != null && !c.getContentEncoder().isCompleted();
+			if (c.isRequestNotSendComplete() || encoderNotCompleted) {// 需要发送数据
+
 			} else { // 收到server 确认
-				count = times.decrementAndGet();
+				sendOver.compareAndSet(false, true);
 			}
 		}
 
 		super.onOutputReady(conn);
 		if (conn instanceof BridgeManagedNHttpClientConnectionImpl) {
 			BridgeManagedNHttpClientConnectionImpl c = (BridgeManagedNHttpClientConnectionImpl) conn;
-			if (c.isRequestNotSendComplete()) {
+			boolean encoderNotCompleted = c.getContentEncoder() != null && !c.getContentEncoder().isCompleted();
+			if (c.isRequestNotSendComplete() || encoderNotCompleted) {// 需要发送数据
 				// do nothing
 			} else {
 				long length = c.getDataLengthTransferred();
 				if (length >= this.bodyLength) {
-					if (count % 2 == 1) {
+					if (!sendOver.get()) {
 						log.info("请求已经发送完毕, 总长度是 " + length);
 					} else {
 						log.info("请求已经发送完毕, 总长度是 " + length + ",收到服务的确认,关闭连接");

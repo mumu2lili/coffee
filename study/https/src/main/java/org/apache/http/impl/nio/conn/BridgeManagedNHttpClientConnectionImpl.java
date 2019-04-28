@@ -8,6 +8,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.config.MessageConstraints;
 import org.apache.http.entity.ContentLengthStrategy;
+import org.apache.http.nio.ContentEncoder;
 import org.apache.http.nio.NHttpMessageParserFactory;
 import org.apache.http.nio.NHttpMessageWriterFactory;
 import org.apache.http.nio.conn.ManagedNHttpClientConnection;
@@ -34,5 +35,9 @@ public class BridgeManagedNHttpClientConnectionImpl extends ManagedNHttpClientCo
 
 	public long getDataLengthTransferred() {
 		return outTransportMetrics.getBytesTransferred();
+	}
+
+	public ContentEncoder getContentEncoder() {
+		return this.contentEncoder;
 	}
 }

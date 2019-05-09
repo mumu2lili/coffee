@@ -49,9 +49,13 @@
 		
 		<module>study/cxf</module>
 		<module>study/web</module>
+		<module>study/https</module>
+		<module>study/websocket</module>
 
 		<module>study/gojs</module>
 		<module>study/jsPlumb</module>
 		<module>study/mxgraph</module>
+		
+		<module>study/k8s</module>
 	</modules>
 </project>

@@ -1,33 +1,59 @@
 package com.piggy.java.lang;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 
 public class ThreadTest {
 
+	static {
+		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+		JoranConfigurator configurator = new JoranConfigurator();
+		configurator.setContext(lc);
+		lc.reset();
+		try {
+			configurator.doConfigure("src/test/resources/logback-spring.xml");
+		} catch (JoranException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private Logger log = LoggerFactory.getLogger(getClass());
+
 	@Test
 	public void test() {
-		new Thread(new Runnable() {
+		Thread t = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				log.info("start");
 				throw new RuntimeException();
-
 			}
-		}).start();
+		});
 
-		while (true) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			System.out.println("I'm running...");
+		MyUncaughtExceptionHandler eh = new MyUncaughtExceptionHandler();
+		t.setUncaughtExceptionHandler(eh);
+
+		t.start();
+
+		while (t.isAlive()) {
+
 		}
+	}
+
+	private static class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
+		private Logger log = LoggerFactory.getLogger(getClass());
+
+		@Override
+		public void uncaughtException(Thread t, Throwable e) {
+			log.error("exxxx", e);
+
+		}
+
 	}
 
 }

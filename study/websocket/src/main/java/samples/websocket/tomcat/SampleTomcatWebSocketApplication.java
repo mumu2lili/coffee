@@ -20,10 +20,8 @@ import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -42,8 +40,7 @@ import samples.websocket.tomcat.snake.SnakeWebSocketHandler;
 
 @EnableAutoConfiguration
 @EnableWebSocket
-public class SampleTomcatWebSocketApplication // extends SpringBootServletInitializer
-		implements WebSocketConfigurer {
+public class SampleTomcatWebSocketApplication implements WebSocketConfigurer {
 
 	@Bean
 	public ServletWebServerFactory servletContainer() {
@@ -64,17 +61,11 @@ public class SampleTomcatWebSocketApplication // extends SpringBootServletInitia
 		return connector;
 	}
 
-	// @Override
+	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(echoWebSocketHandler(), "/echo").withSockJS();
 		registry.addHandler(snakeWebSocketHandler(), "/snake").withSockJS();
 	}
-	//
-	// @Override
-	// protected SpringApplicationBuilder configure(SpringApplicationBuilder
-	// application) {
-	// return application.sources(SampleTomcatWebSocketApplication.class);
-	// }
 
 	@Bean
 	public EchoService echoService() {

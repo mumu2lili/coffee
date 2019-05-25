@@ -1,4 +1,4 @@
-package com.piggy.coffee.https.controller;
+package com.piggy.coffee.https.utils;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.piggy.coffee.https.utils.NioHttpClientUtils;
 
-public class SampleControllerTest {
+public class NioHttpClientUtilsTest {
 
 	@Test
 	public void testNioHttp() throws InterruptedException, ExecutionException, IOException {

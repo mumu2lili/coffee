@@ -53,7 +53,7 @@ public class BridgeInternalIODispatch extends InternalIODispatch {
 						log.info("请求已经发送完毕, 总长度是 " + length + ",收到服务的确认,关闭连接");
 						try {
 							conn.close();
-							client.close();
+							// client.close();
 						} catch (IOException e) {
 							log.error("nio 关闭异常", e);
 						}

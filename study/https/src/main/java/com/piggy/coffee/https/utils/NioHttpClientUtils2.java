@@ -66,6 +66,7 @@ public class NioHttpClientUtils2 {
 			StringEntity entity = new StringEntity(data, contentType);
 			request.setEntity(entity);
 
+			final SendOver SendOver = new SendOver();
 			httpclient.execute(request, new FutureCallback<HttpResponse>() {
 
 				@Override
@@ -75,18 +76,22 @@ public class NioHttpClientUtils2 {
 					} else {
 						log.error("请求发送失败");
 					}
+					SendOver.over = true;
 				}
 
 				@Override
 				public void completed(HttpResponse resp) {
-
+					SendOver.over = true;
 				}
 
 				@Override
 				public void cancelled() {
-
+					SendOver.over = true;
 				}
 			});
+			while(!SendOver.over) {
+				
+			}
 		} catch (Exception e) {
 			log.error("发送 POST 请求出现异常！", e);
 		}
@@ -103,4 +108,7 @@ public class NioHttpClientUtils2 {
 		}
 	}
 
+	private static class SendOver {
+	   private boolean over = false;
+	}
 }

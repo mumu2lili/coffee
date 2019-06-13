@@ -337,7 +337,7 @@
 			<id>central2</id>
 			<url>http://mvnrepository.com</url>
 		</repository>
-		<repository>
+		<!-- <repository>
 			<id>spring-milestones</id>
 			<url>http://repo.spring.io/milestone</url>
 			<snapshots>
@@ -358,7 +358,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
+		</repository> -->
 	</repositories>
 
 	<pluginRepositories />

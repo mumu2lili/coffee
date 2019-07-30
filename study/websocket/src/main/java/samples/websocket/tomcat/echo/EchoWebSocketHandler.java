@@ -44,17 +44,21 @@ public class EchoWebSocketHandler extends TextWebSocketHandler {
 	}
 
 	@Override
-	public void handleTextMessage(WebSocketSession session, TextMessage message)
-			throws Exception {
+	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String echoMessage = this.echoService.getMessage(message.getPayload());
 		logger.debug(echoMessage);
 		session.sendMessage(new TextMessage(echoMessage));
 	}
 
 	@Override
-	public void handleTransportError(WebSocketSession session, Throwable exception)
-			throws Exception {
+	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		session.close(CloseStatus.SERVER_ERROR);
+	}
+
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		super.afterConnectionClosed(session, status);
+		logger.debug("close session in instance " + this);
 	}
 
 }

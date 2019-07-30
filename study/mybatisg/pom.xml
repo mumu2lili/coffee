@@ -48,7 +48,7 @@
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.1</version>
 				<configuration>
-					<configurationFile>src/test/resources/generatorConfig-saas.xml</configurationFile>
+					<configurationFile>src/test/resources/generatorConfig-bridge.xml</configurationFile>
 					<overwrite>true</overwrite>
 				</configuration>
 				<dependencies>

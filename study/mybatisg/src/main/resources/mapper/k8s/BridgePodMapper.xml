@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.educoder.bridge.k8s.dao.BridgePodMapper" >
+  <resultMap id="BaseResultMap" type="com.educoder.bridge.k8s.model.BridgePod" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tpi_ID" property="tpiId" jdbcType="VARCHAR" />
+    <result column="k8s_create_time" property="k8sCreateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <result column="sec_key" property="secKey" jdbcType="VARCHAR" />
+    <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
+    <result column="pull" property="pull" jdbcType="DOUBLE" />
+    <result column="create_pod" property="createPod" jdbcType="DOUBLE" />
+    <result column="execute" property="execute" jdbcType="DOUBLE" />
+    <result column="evaluate_all_time" property="evaluateAllTime" jdbcType="DOUBLE" />
+    <result column="node_name" property="nodeName" jdbcType="VARCHAR" />
+    <result column="node_ip" property="nodeIp" jdbcType="VARCHAR" />
+    <result column="download_status" property="downloadStatus" jdbcType="CHAR" />
+    <result column="create_pod_status" property="createPodStatus" jdbcType="CHAR" />
+    <result column="compile_status" property="compileStatus" jdbcType="CHAR" />
+    <result column="run_status" property="runStatus" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, tpi_ID, k8s_create_time, delete_time, sec_key, request_time, pull, create_pod, 
+    execute, evaluate_all_time, node_name, node_ip, download_status, create_pod_status, 
+    compile_status, run_status, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bridge_pod
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bridge_pod
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.educoder.bridge.k8s.model.BridgePod" >
+    insert into bridge_pod (id, name, tpi_ID, 
+      k8s_create_time, delete_time, sec_key, 
+      request_time, pull, create_pod, 
+      execute, evaluate_all_time, node_name, 
+      node_ip, download_status, create_pod_status, 
+      compile_status, run_status, status
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{tpiId,jdbcType=VARCHAR}, 
+      #{k8sCreateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}, #{secKey,jdbcType=VARCHAR}, 
+      #{requestTime,jdbcType=TIMESTAMP}, #{pull,jdbcType=DOUBLE}, #{createPod,jdbcType=DOUBLE}, 
+      #{execute,jdbcType=DOUBLE}, #{evaluateAllTime,jdbcType=DOUBLE}, #{nodeName,jdbcType=VARCHAR}, 
+      #{nodeIp,jdbcType=VARCHAR}, #{downloadStatus,jdbcType=CHAR}, #{createPodStatus,jdbcType=CHAR}, 
+      #{compileStatus,jdbcType=CHAR}, #{runStatus,jdbcType=CHAR}, #{status,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.educoder.bridge.k8s.model.BridgePod" >
+    insert into bridge_pod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tpiId != null" >
+        tpi_ID,
+      </if>
+      <if test="k8sCreateTime != null" >
+        k8s_create_time,
+      </if>
+      <if test="deleteTime != null" >
+        delete_time,
+      </if>
+      <if test="secKey != null" >
+        sec_key,
+      </if>
+      <if test="requestTime != null" >
+        request_time,
+      </if>
+      <if test="pull != null" >
+        pull,
+      </if>
+      <if test="createPod != null" >
+        create_pod,
+      </if>
+      <if test="execute != null" >
+        execute,
+      </if>
+      <if test="evaluateAllTime != null" >
+        evaluate_all_time,
+      </if>
+      <if test="nodeName != null" >
+        node_name,
+      </if>
+      <if test="nodeIp != null" >
+        node_ip,
+      </if>
+      <if test="downloadStatus != null" >
+        download_status,
+      </if>
+      <if test="createPodStatus != null" >
+        create_pod_status,
+      </if>
+      <if test="compileStatus != null" >
+        compile_status,
+      </if>
+      <if test="runStatus != null" >
+        run_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tpiId != null" >
+        #{tpiId,jdbcType=VARCHAR},
+      </if>
+      <if test="k8sCreateTime != null" >
+        #{k8sCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secKey != null" >
+        #{secKey,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pull != null" >
+        #{pull,jdbcType=DOUBLE},
+      </if>
+      <if test="createPod != null" >
+        #{createPod,jdbcType=DOUBLE},
+      </if>
+      <if test="execute != null" >
+        #{execute,jdbcType=DOUBLE},
+      </if>
+      <if test="evaluateAllTime != null" >
+        #{evaluateAllTime,jdbcType=DOUBLE},
+      </if>
+      <if test="nodeName != null" >
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeIp != null" >
+        #{nodeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadStatus != null" >
+        #{downloadStatus,jdbcType=CHAR},
+      </if>
+      <if test="createPodStatus != null" >
+        #{createPodStatus,jdbcType=CHAR},
+      </if>
+      <if test="compileStatus != null" >
+        #{compileStatus,jdbcType=CHAR},
+      </if>
+      <if test="runStatus != null" >
+        #{runStatus,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.educoder.bridge.k8s.model.BridgePod" >
+    update bridge_pod
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tpiId != null" >
+        tpi_ID = #{tpiId,jdbcType=VARCHAR},
+      </if>
+      <if test="k8sCreateTime != null" >
+        k8s_create_time = #{k8sCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null" >
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secKey != null" >
+        sec_key = #{secKey,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        request_time = #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pull != null" >
+        pull = #{pull,jdbcType=DOUBLE},
+      </if>
+      <if test="createPod != null" >
+        create_pod = #{createPod,jdbcType=DOUBLE},
+      </if>
+      <if test="execute != null" >
+        execute = #{execute,jdbcType=DOUBLE},
+      </if>
+      <if test="evaluateAllTime != null" >
+        evaluate_all_time = #{evaluateAllTime,jdbcType=DOUBLE},
+      </if>
+      <if test="nodeName != null" >
+        node_name = #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeIp != null" >
+        node_ip = #{nodeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadStatus != null" >
+        download_status = #{downloadStatus,jdbcType=CHAR},
+      </if>
+      <if test="createPodStatus != null" >
+        create_pod_status = #{createPodStatus,jdbcType=CHAR},
+      </if>
+      <if test="compileStatus != null" >
+        compile_status = #{compileStatus,jdbcType=CHAR},
+      </if>
+      <if test="runStatus != null" >
+        run_status = #{runStatus,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.educoder.bridge.k8s.model.BridgePod" >
+    update bridge_pod
+    set name = #{name,jdbcType=VARCHAR},
+      tpi_ID = #{tpiId,jdbcType=VARCHAR},
+      k8s_create_time = #{k8sCreateTime,jdbcType=TIMESTAMP},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      sec_key = #{secKey,jdbcType=VARCHAR},
+      request_time = #{requestTime,jdbcType=TIMESTAMP},
+      pull = #{pull,jdbcType=DOUBLE},
+      create_pod = #{createPod,jdbcType=DOUBLE},
+      execute = #{execute,jdbcType=DOUBLE},
+      evaluate_all_time = #{evaluateAllTime,jdbcType=DOUBLE},
+      node_name = #{nodeName,jdbcType=VARCHAR},
+      node_ip = #{nodeIp,jdbcType=VARCHAR},
+      download_status = #{downloadStatus,jdbcType=CHAR},
+      create_pod_status = #{createPodStatus,jdbcType=CHAR},
+      compile_status = #{compileStatus,jdbcType=CHAR},
+      run_status = #{runStatus,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

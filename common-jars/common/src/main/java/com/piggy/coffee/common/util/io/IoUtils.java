@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class IoUtils {
+public final class IoUtils {
 
 	public static final byte[] getByteByInputStream(InputStream in) {
 		ByteArrayOutputStream bout = null;

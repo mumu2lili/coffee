@@ -3,11 +3,15 @@ package com.piggy.coffee.k8s;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.fabric8.kubernetes.api.model.NodeAffinityBuilder;
+import io.fabric8.kubernetes.api.model.NodeSelectorRequirementBuilder;
+import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import okhttp3.Response;
@@ -31,6 +35,19 @@ public class ExecTest3 extends ClientTest {
 			ShellExecTimeManager manager = new ShellExecTimeManager();
 			manager.init();
 			// 要不得
+		//	client.events()..
+	//		new NodeAffinityBuilder().wi
+			client = new DefaultKubernetesClient();
+		String str =	client.pods().inNamespace("default").createOrReplaceWithNew().withNewMetadata().withName("a")
+			.endMetadata().withNewSpec().withNewAffinity().withNewNodeAffinity().addNewPreferredDuringSchedulingIgnoredDuringExecution().withNewPreference()
+	        .withMatchExpressions(Arrays.asList(new NodeSelectorRequirementBuilder()
+	          .withKey("k8s.io/cluster-autoscaler")
+	          .withOperator("DoesNotExist")
+	          .build()
+	          )).endPreference().endPreferredDuringSchedulingIgnoredDuringExecution().endNodeAffinity().endAffinity().endSpec().toString();
+		log.info(str);
+			
+
 			ExecWatch watch = client.pods().inNamespace("default").withName("mypoda").redirectingInput()
 					.redirectingOutput().redirectingError().withTTY().usingListener(new SimpleListener())
 					.exec("sh", scriptPth);

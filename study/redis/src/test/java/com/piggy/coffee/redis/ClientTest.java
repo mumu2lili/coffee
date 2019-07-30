@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.piggy.coffee.redis.util.JedisUtil;
 import com.piggy.coffee.redis.util.PortUtil;
 
 public class ClientTest {
@@ -16,6 +17,8 @@ public class ClientTest {
 
 	@Test
 	public void test() {
+		JedisUtil.set("port", "0");
+		
 		for (int i = 0; i < 50; i++) {
 			new Thread(new Runnable() {
 
@@ -44,6 +47,13 @@ public class ClientTest {
 			e.printStackTrace();
 		}
 		log.info("总共获取的port数量{}", map.size());
+	}
+	
+	
+	@Test
+	public void test2() {
+	    boolean r = PortUtil.isPortUsed("192.168.56.101", 3307);
+	    System.out.println(r);
 	}
 
 }

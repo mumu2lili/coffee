@@ -28,7 +28,8 @@ public class NioHttpClientUtils2 {
 				.setConnectionRequestTimeout(1000) // 从连接池获取连接的超时时间。
 				.build();
 		CloseableHttpAsyncClient httpclient = BridgeHttpAsyncClientBuilder.create()
-				.setDefaultRequestConfig(requestConfig).setBodyLength(0).build();
+				.setDefaultRequestConfig(requestConfig).setMaxConnPerRoute(6).setMaxConnTotal(60).setBodyLength(0)
+				.build();
 
 		httpclient.start();
 
@@ -73,7 +74,7 @@ public class NioHttpClientUtils2 {
 					if (ex instanceof ConnectionClosedException) {
 
 					} else {
-						log.error("请求发送失败");
+						log.error("请求发送失败", ex);
 					}
 				}
 

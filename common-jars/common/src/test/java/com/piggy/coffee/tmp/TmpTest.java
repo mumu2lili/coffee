@@ -16,6 +16,8 @@ public class TmpTest {
 
 		long secends = ChronoUnit.SECONDS.between(startTime, endTime);
 		System.out.println(secends);
+		
+		System.out.println(Integer.MAX_VALUE);
 
 	}
 

@@ -1,7 +1,6 @@
 package com.piggy.coffee.tmp;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +10,10 @@ import org.junit.Test;
 public class TmpTest {
 	@Test
 	public void test() {
-		LocalDateTime startTime = LocalDateTime.parse("2019-07-29T17:56:00");
-		LocalDateTime endTime = LocalDateTime.parse("2019-07-29T17:55:01");
+		String str = "C:\\Users\\mumu\\Desktop\\tmp\\a\\b";
 
-		long secends = ChronoUnit.SECONDS.between(startTime, endTime);
-		System.out.println(secends);
-		
-		System.out.println(Integer.MAX_VALUE);
+		File file = new File(str);
+		System.out.println(file.exists());
 
 	}
 

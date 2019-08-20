@@ -57,5 +57,6 @@
 		<module>study/mxgraph</module>
 		
 		<module>study/k8s</module>
+		<module>study/logtool</module>
 	</modules>
 </project>

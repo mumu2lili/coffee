@@ -23,7 +23,8 @@ public class KafkaExactSendTimeTest {
 		Map<Integer, Integer> map = new TreeMap<>();
 
 		String logFile = "D:\\\\tmp\\\\logs\\\\bridge.2019-08-03.log";
-		logFile = "D:\\mumu\\company\\zhiqin\\test_data\\bridge02\\bridge.2019-08-20.log";
+		logFile = "D:\\mumu\\company\\zhiqin\\test_data\\bridge02\\bridge.2019-08-21.log";
+		logFile = "D:\\mumu\\company\\zhiqin\\ucloud_data\\bridge01\\bridge.2019-08-22.log";
 		Files.lines(Paths.get(logFile), StandardCharsets.UTF_8)
 				.forEach(new Consumer<String>() {
 
@@ -66,4 +67,10 @@ public class KafkaExactSendTimeTest {
 		map.put(expendTime, count);
 	}
 
+	@Test
+	public void t() {
+		//log.error("a {} c", "b", new Exception("ee"));
+		//log.error("a b c", new Exception("ee"));
+		log.error("a b c", new Object());
+	}
 }

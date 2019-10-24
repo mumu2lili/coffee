@@ -1,6 +1,10 @@
 package com.piggy.coffee.tmp;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +14,10 @@ import org.junit.Test;
 public class TmpTest {
 	@Test
 	public void test() {
-		String str = "C:\\Users\\mumu\\Desktop\\tmp\\a\\b";
+		String tmp = "10-15 00:00:38 [8gvslq9xojy6] [threadPoolTaskExecutor-75] INFO  -- educoderURL: https://www.educoder.net/api/myshixuns/training_task_status.json?t=1571068838329, result: {\"jsonTestDetails\":\"{\\\"buildID\\\":\\\"2509174\\\",\\\"compileSuccess\\\":\\\"1\\\",\\\"createPodStatus\\\":\\\"1\\\",\\\"downloadStatus\\\":\\\"1\\\",\\\"msg\\\":[{\\\"caseId\\\":\\\"1\\\",\\\"output\\\":\\\"5Luj56CB6K-E5rWL6LaF5pe277yB5pys5YWz6ZmQ5a6a5pe26Ze05Li677yaMjBz77yM6K-35qOA5p-l5Luj56CB5piv5ZCm5a2Y5Zyo5q275b6q546v5oiW5YW25LuW6ICX5pe25pON5L2c\\\",\\\"passed\\\":\\\"0\\\"}],\\\"outPut\\\":\\\"5YWx5pyJMee7hOa1i-ivlembhu-8jOWFtuS4reaciTHnu4TmtYvor5Xnu5PmnpzkuI3ljLnphY3jgILor6bmg4XlpoLkuIvvvJo\\\",\\\"resubmit\\\":\\\"\\\",\\\"sec_key\\\":\\\"8gvslq9xojy6\\\",\\\"status\\\":\\\"-1\\\",\\\"tpiID\\\":\\\"661634\\\"}\",\"timeCost\":\"{\\\"evaluateEnd\\\":\\\"2019-10-15T00:00:38.329\\\",\\\"pull\\\":\\\"0.219\\\",\\\"createPod\\\":\\\"2.035\\\",\\\"evaluateAllTime\\\":\\\"22.103\\\",\\\"execute\\\":\\\"20.007\\\",\\\"evaluateStartTime\\\":\\\"2019-10-15T00:00:16.226\\\"}\",\"tpiRepoPath\":\"workspace/myshixun_661634/gn6x2uj3rw20191012105555\"}";
+		int begin = tmp.indexOf("evaluateEnd\\\":\\\"") + "evaluateEnd\\\":\\\"".length();
 
-		File file = new File(str);
-		System.out.println(file.exists());
+		System.out.println(begin);
 
 	}
 
@@ -121,6 +125,19 @@ public class TmpTest {
 		}
 
 		System.out.println("podMgr size " + podMgr.size());
+	}
+	
+	
+	@Test
+	public void testTime() {
+		LocalDateTime time = LocalDateTime.now();
+		String s = cvtTime(time);
+		System.out.println(s);
+	}
+	
+	private String cvtTime(LocalDateTime time) {
+		time = time.minusHours(8);
+		return DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'").format(time);
 	}
 
 }

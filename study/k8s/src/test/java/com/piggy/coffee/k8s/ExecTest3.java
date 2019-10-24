@@ -21,6 +21,7 @@ public class ExecTest3 extends ClientTest {
 
 	@Test
 	public void test() {
+		log.error("a {} a", "b", new Exception("eee"));
 		this.test("/root/a.sh");
 	}
 

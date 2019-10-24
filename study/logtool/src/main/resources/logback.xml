@@ -10,7 +10,7 @@
 
     <appender name="bridge" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
-            <pattern>%d{MM-dd HH:mm:ss} [%X{sec_key}] [%thread] %-5level -- %msg%n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/bridge.%d{yyyy-MM-dd}.log</fileNamePattern>

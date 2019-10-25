@@ -20,6 +20,7 @@ public class InfluxDbSqlCreateTest {
 		createCpuUsage(param);
 		createCpuUsageRate(param);
 		createMemoryPageFaultsRate(param);
+		createCurl(param);
 	}
 
 	private void createCpuUsage(EvaluatingAssayParam assayParam) {
@@ -53,6 +54,18 @@ public class InfluxDbSqlCreateTest {
 		cmd = String.format(cmd, startTime, endTime, podName);
 
 		System.out.println("********cpu/page_faults_rate********");
+		System.out.println(cmd);
+
+	}
+
+	private void createCurl(EvaluatingAssayParam assayParam) {
+
+		// 语句
+		String cmd = "curl -X POST -H 'Content-Type: application/json' -i 'http://172.16.94.254:8890/bridge/monitors/evaluatings/assays/1' -d '{\"tpiID\":\"%s\",\"podType\":%d,\"instanceChallenge\":\"%s\",\"timeLimit\":%d,\"evaluateStartTime\":\"%s\",\"evaluateEndTime\":\"%s\"}'";
+		cmd = String.format(cmd, assayParam.tpiID, assayParam.podType, assayParam.instanceChallenge,
+				assayParam.timeLimit, assayParam.evaluateStartTime, assayParam.evaluateEndTime);
+
+		System.out.println("********curl********");
 		System.out.println(cmd);
 
 	}

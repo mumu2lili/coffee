@@ -27,4 +27,14 @@ public class JsonUtils {
 		}
 	}
 
+	public static <T> T toBean(String content, Class<T> clazz) {
+
+		try {
+			T t = mapper.readValue(content, clazz);
+			return t;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

@@ -16,29 +16,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SysBusyTest {
+public class SysBuzyTest {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
-	private static class EvaluatingAssayParam {
-		private String tpiID;
-		private Integer podType;
-		private String instanceChallenge;
-		private Integer timeLimit;
-		private String evaluateStartTime;
-		private String evaluateEndTime;
-		/**
-		 * 原始req
-		 */
-		private String req;
-		/**
-		 * 原始res
-		 */
-		private String res;
-
-	}
-
 	@Test
-	public void testTimeout() throws IOException {
+	public void testSysBusy() throws IOException {
 
 		Map<String, EvaluatingAssayParam> reqMap = new HashMap<>();
 		String logFile = null;
@@ -47,14 +29,14 @@ public class SysBusyTest {
 		logFile = "D:\\mumu\\company\\zhi_log\\bridge02_201910\\bridge.2019-10-15.log";
 		this.extractReq(reqMap, logFile);
 
-		Map<LocalDateTime, EvaluatingAssayParam> timeoutMap = new TreeMap<>();
+		Map<LocalDateTime, EvaluatingAssayParam> sysBusyMap = new TreeMap<>();
 		logFile = "D:\\mumu\\company\\zhi_log\\bridge01_201910\\bridge.2019-10-15.log";
-		this.extractTimeout(timeoutMap, reqMap, logFile);
+		this.extractTimeout(sysBusyMap, reqMap, logFile);
 		logFile = "D:\\mumu\\company\\zhi_log\\bridge02_201910\\bridge.2019-10-15.log";
-		this.extractTimeout(timeoutMap, reqMap, logFile);
+		this.extractTimeout(sysBusyMap, reqMap, logFile);
 
 		// log.info("超时！！！！！！！");
-		for (Iterator<Entry<LocalDateTime, EvaluatingAssayParam>> iter = timeoutMap.entrySet().iterator(); iter
+		for (Iterator<Entry<LocalDateTime, EvaluatingAssayParam>> iter = sysBusyMap.entrySet().iterator(); iter
 				.hasNext();) {
 			Entry<LocalDateTime, EvaluatingAssayParam> entry = iter.next();
 			EvaluatingAssayParam param = entry.getValue();
@@ -93,7 +75,7 @@ public class SysBusyTest {
 
 			@Override
 			public void accept(String line) {
-				String str = "5Luj56CB6K-E5rWL6LaF5pe277yB";
+				String str = "57O757uf57mB5b-Z77yM6K-356iN5ZCO6YeN6K-V";
 				if (line.matches(".*" + str + ".*")) {
 					int begin = line.indexOf("[") + 1;
 					int end = line.indexOf("]");

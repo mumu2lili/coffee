@@ -13,8 +13,7 @@ public class InfluxDbSqlCreateTest {
 	@Test
 	public void testCreate() throws IOException {
 
-		String str = "{\"tpiID\":\"712704\",\"podType\":0,\"instanceChallenge\":\"1\",\"timeLimit\":15,\"evaluateStartTime\":\"2019-10-25 11:23:27\",\"evaluateEndTime\":\"2019-10-25 11:23:44\"}"
-				+ "";
+		String str = "{\"tpiID\":\"713151\",\"podType\":0,\"instanceChallenge\":\"1\",\"timeLimit\":120,\"evaluateStartTime\":\"2019-10-25 17:02:28\",\"evaluateEndTime\":\"2019-10-25 17:03:41\"}";
 
 		EvaluatingAssayParam param = JsonUtils.toBean(str, EvaluatingAssayParam.class);
 		createCpuUsage(param);
@@ -47,7 +46,7 @@ public class InfluxDbSqlCreateTest {
 	private void createMemoryPageFaultsRate(EvaluatingAssayParam assayParam) {
 
 		// 语句
-		String cmd = "select time, container_name, nodename, pod_name, type, value from \"memory/page_faults_rate\" where time >= '%s' and time <= '%s' and pod_name = '%s';";
+		String cmd = "select time, container_name, nodename, pod_name, type, value from \"memory/page_faults_rate\" where time >= '%s' and time <= '%s' and pod_name =~ /.*-%s/;";
 		String startTime = cvtTime(assayParam.getEvaluateStartTime().minusHours(8).minusSeconds(10)); // 东8区
 		String endTime = cvtTime(assayParam.getEvaluateEndTime().minusHours(8).plusSeconds(20));// 加上收集时间
 		String podName = assayParam.tpiID;

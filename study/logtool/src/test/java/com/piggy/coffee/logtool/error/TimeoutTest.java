@@ -25,16 +25,14 @@ public class TimeoutTest {
 
 		Map<String, EvaluatingAssayParam> reqMap = new HashMap<>();
 		String logFile = null;
-		// logFile =
-		// "D:\\mumu\\company\\zhi_log\\bridge01_201910\\bridge.2019-10-15.log";
-		// this.extractReq(reqMap, logFile);
+		logFile = "D:\\mumu\\company\\zhi_log\\bridge01_201910\\bridge.2019-10-25.log";
+		this.extractReq(reqMap, logFile);
 		logFile = "D:\\mumu\\company\\zhi_log\\bridge02_201910\\bridge.2019-10-25.log";
 		this.extractReq(reqMap, logFile);
 
 		Map<LocalDateTime, EvaluatingAssayParam> timeoutMap = new TreeMap<>();
-		// logFile =
-		// "D:\\mumu\\company\\zhi_log\\bridge01_201910\\bridge.2019-10-15.log";
-		// this.extractTimeout(timeoutMap, reqMap, logFile);
+		logFile = "D:\\mumu\\company\\zhi_log\\bridge01_201910\\bridge.2019-10-25.log";
+		this.extractTimeout(timeoutMap, reqMap, logFile);
 		logFile = "D:\\mumu\\company\\zhi_log\\bridge02_201910\\bridge.2019-10-25.log";
 		this.extractTimeout(timeoutMap, reqMap, logFile);
 

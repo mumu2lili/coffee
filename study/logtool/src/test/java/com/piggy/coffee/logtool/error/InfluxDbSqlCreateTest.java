@@ -23,7 +23,7 @@ public class InfluxDbSqlCreateTest {
 	}
 
 	private void createCpuUsage(EvaluatingAssayParam assayParam) {
-		String cmd = "select time, container_name, nodename, pod_name, type, value from \"cpu/usage\" where time >= '%s' and time <= '%s' and pod_name =~ /.--%s/;";
+		String cmd = "select time, container_name, nodename, pod_name, type, value from \"cpu/usage\" where time >= '%s' and time <= '%s' and pod_name =~ /.*-%s/;";
 		System.out.println("--------cpu/usage--------");
 
 		System.out.println("--1");
@@ -61,7 +61,7 @@ public class InfluxDbSqlCreateTest {
 	private void createMemoryPageFaultsRate(EvaluatingAssayParam assayParam) {
 
 		// 语句
-		String cmd = "select time, container_name, nodename, pod_name, type, value from \"memory/page_faults_rate\" where time >= '%s' and time <= '%s' and pod_name =~ /.--%s/;";
+		String cmd = "select time, container_name, nodename, pod_name, type, value from \"memory/page_faults_rate\" where time >= '%s' and time <= '%s' and pod_name =~ /.*-%s/;";
 		System.out.println("--------cpu/page_faults_rate--------");
 
 		System.out.println("--1");

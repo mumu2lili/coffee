@@ -17,8 +17,8 @@ import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
 import okhttp3.Response;
 
-public class ExecTest3 extends ClientTest {
-	private Logger logger = LoggerFactory.getLogger(ExecTest3.class);
+public class ExecTest302 extends ClientTest {
+	private Logger logger = LoggerFactory.getLogger(ExecTest302.class);
 
 	@Test
 	public void test() throws InterruptedException {
@@ -38,10 +38,9 @@ public class ExecTest3 extends ClientTest {
 			PipedInputStream pis = new PipedInputStream();
 			PipedOutputStream pos = new PipedOutputStream(pis);
 			PodResource<Pod, DoneablePod> podResource = client.pods().inNamespace("default").withName("hello");
-			ExecWatch watch = podResource.readingInput(in).writingOutput(pos)//.withTTY()// 不能有tty
-					.usingListener(new SimpleListener(pos, "hello")).exec("bash", "-c", "timeout 30 bash " + scriptPth);
+			ExecWatch watch = podResource.readingInput(in).writingOutput(pos).withTTY()
+					.usingListener(new SimpleListener(pos, "hello")).exec("sh", scriptPth);
 
-			watch.close();
 			// manager.putExecTime(watch, 10);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(pis));
 			StringBuilder sb = new StringBuilder();

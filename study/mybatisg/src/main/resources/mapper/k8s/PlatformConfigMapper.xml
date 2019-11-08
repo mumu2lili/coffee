@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.educoder.bridge.k8s.dao.PlatformConfigMapper">
+	<resultMap id="BaseResultMap"
+		type="com.educoder.bridge.k8s.model.PlatformConfig">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="platform" property="platform"
+			jdbcType="VARCHAR" />
+		<result column="containers_md5" property="containersMd5"
+			jdbcType="VARCHAR" />
+		<result column="containers" property="containers"
+			jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime"
+			jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.educoder.bridge.k8s.model.PlatformConfig"
+		extends="BaseResultMap">
+		<result column="script" property="script"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, platform, containers_md5, containers, create_time, update_time
+	</sql>
+	<sql id="Blob_Column_List">
+		script
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from platform_config
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from platform_config
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.educoder.bridge.k8s.model.PlatformConfig">
+		insert into platform_config (id, platform, containers_md5,
+		containers, create_time, update_time,
+		script)
+		values (#{id,jdbcType=BIGINT}, #{platform,jdbcType=VARCHAR},
+		#{containersMd5,jdbcType=VARCHAR},
+		#{containers,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{script,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.educoder.bridge.k8s.model.PlatformConfig">
+		insert into platform_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="platform != null">
+				platform,
+			</if>
+			<if test="containersMd5 != null">
+				containers_md5,
+			</if>
+			<if test="containers != null">
+				containers,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="script != null">
+				script,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="platform != null">
+				#{platform,jdbcType=VARCHAR},
+			</if>
+			<if test="containersMd5 != null">
+				#{containersMd5,jdbcType=VARCHAR},
+			</if>
+			<if test="containers != null">
+				#{containers,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="script != null">
+				#{script,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.educoder.bridge.k8s.model.PlatformConfig">
+		update platform_config
+		<set>
+			<if test="platform != null">
+				platform = #{platform,jdbcType=VARCHAR},
+			</if>
+			<if test="containersMd5 != null">
+				containers_md5 = #{containersMd5,jdbcType=VARCHAR},
+			</if>
+			<if test="containers != null">
+				containers = #{containers,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="script != null">
+				script = #{script,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.educoder.bridge.k8s.model.PlatformConfig">
+		update platform_config
+		set platform = #{platform,jdbcType=VARCHAR},
+		containers_md5 = #{containersMd5,jdbcType=VARCHAR},
+		containers = #{containers,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP},
+		script = #{script,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.educoder.bridge.k8s.model.PlatformConfig">
+		update platform_config
+		set platform = #{platform,jdbcType=VARCHAR},
+		containers_md5 = #{containersMd5,jdbcType=VARCHAR},
+		containers = #{containers,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

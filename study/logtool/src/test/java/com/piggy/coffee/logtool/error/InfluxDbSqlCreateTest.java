@@ -13,8 +13,7 @@ public class InfluxDbSqlCreateTest {
 	@Test
 	public void testCreate() throws IOException {
 
-		String str = "{\"tpiID\":\"722334\",\"podType\":2,\"instanceChallenge\":\"2\",\"timeLimit\":60,\"evaluateStartTime\":\"2019-10-28 11:10:15\",\"evaluateEndTime\":\"2019-10-28 11:10:18\"}";
-
+		String str = "{\"tpiID\":\"745792\",\"podType\":0,\"instanceChallenge\":\"7\",\"timeLimit\":15,\"evaluateStartTime\":\"2019-10-31 22:03:01\",\"evaluateEndTime\":\"2019-10-31 22:03:01\"}" ;
 		EvaluatingAssayParam param = JsonUtils.toBean(str, EvaluatingAssayParam.class);
 		createCpuUsage(param);
 		createCpuUsageRate(param);

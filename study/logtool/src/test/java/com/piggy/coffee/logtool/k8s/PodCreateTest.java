@@ -29,7 +29,7 @@ public class PodCreateTest {
 
 		List<String> list = new LinkedList<>();
 		String logFile = null;
-		logFile = "D:\\mumu\\company\\zhiqin_test\\特别监控\\create-20190929.txt";
+		logFile = "D:\\mumu\\company\\zhiqin\\zhiqin_监控\\特别监控\\create-20191031.txt";
 
 		Files.lines(Paths.get(logFile), StandardCharsets.UTF_8).forEach(new Consumer<String>() {
 

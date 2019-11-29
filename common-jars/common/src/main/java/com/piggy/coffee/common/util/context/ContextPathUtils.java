@@ -6,7 +6,7 @@ package com.piggy.coffee.common.util.context;
  * @author mumu
  *
  */
-public class ContextPathUtils {
+public final class ContextPathUtils {
 
 	private static String contextPath;
 

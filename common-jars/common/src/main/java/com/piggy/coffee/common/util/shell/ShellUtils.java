@@ -12,10 +12,7 @@ import java.util.concurrent.TimeoutException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by guange on 26/02/2017.
- */
-public class ShellUtils {
+public final class ShellUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(ShellUtils.class);
 

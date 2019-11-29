@@ -13,15 +13,15 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-public class ZipUtils {
+public final class ZipUtils {
 
 	public static void unZip(String src, String target) throws IOException {
 		ZipInputStream zipIs = null;
 		ZipFile zipFile = null;
 		try {
-			zipFile = new ZipFile(src); 
+			zipFile = new ZipFile(src);
 			zipIs = new ZipInputStream(new FileInputStream(src));
-			ZipEntry zipEntry = null;	
+			ZipEntry zipEntry = null;
 			while ((zipEntry = zipIs.getNextEntry()) != null) {
 				File file = new File(target + zipEntry.getName());
 				if (zipEntry.getName().endsWith("/")) {
@@ -59,7 +59,6 @@ public class ZipUtils {
 		}
 		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(target));
 		for (File file : files) {
-			System.out.println(file);
 			ZipEntry entry = null;
 			byte[] b = new byte[1024];
 			int len = 0;

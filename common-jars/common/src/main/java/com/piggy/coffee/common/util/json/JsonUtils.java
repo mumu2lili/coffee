@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author mumu
  *
  */
-public class JsonUtils {
+public final class JsonUtils {
 
 	private static ObjectMapper mapper = new ObjectMapper();
 

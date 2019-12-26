@@ -18,11 +18,11 @@
 
 
 	<dependencies>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc</artifactId>
 			<version>jdk8</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>

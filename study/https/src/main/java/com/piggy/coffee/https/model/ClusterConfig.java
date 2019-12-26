@@ -1,5 +1,8 @@
 package com.piggy.coffee.https.model;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties(prefix="cluster.map")
 public class ClusterConfig {
 
 	private String username;

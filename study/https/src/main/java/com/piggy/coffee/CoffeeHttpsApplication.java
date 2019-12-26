@@ -1,6 +1,7 @@
 package com.piggy.coffee;
 
 import org.apache.catalina.connector.Connector;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class CoffeeHttpsApplication {
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(CoffeeHttpsApplication.class).web(true).run(args);
+		new SpringApplicationBuilder(CoffeeHttpsApplication.class).web(WebApplicationType.SERVLET).run(args);
 	}
 
 	@Bean

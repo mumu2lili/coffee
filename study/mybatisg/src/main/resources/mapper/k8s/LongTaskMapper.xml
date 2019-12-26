@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.educoder.bridge.k8s.dao.LongTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.educoder.bridge.k8s.model.LongTask" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pod_name" property="podName" jdbcType="VARCHAR" />
+    <result column="tpi_id" property="tpiId" jdbcType="VARCHAR" />
+    <result column="pod_type" property="podType" jdbcType="INTEGER" />
+    <result column="time_limit" property="timeLimit" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="restart_times" property="restartTimes" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="last_check_time" property="lastCheckTime" jdbcType="TIMESTAMP" />
+    <result column="check_way" property="checkWay" jdbcType="VARCHAR" />
+    <result column="node_name" property="nodeName" jdbcType="VARCHAR" />
+    <result column="node_ip" property="nodeIp" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pod_name, tpi_id, pod_type, time_limit, start_time, end_time, restart_times, 
+    status, last_check_time, check_way, node_name, node_ip, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from long_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from long_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.educoder.bridge.k8s.model.LongTask" >
+    insert into long_task (id, pod_name, tpi_id, 
+      pod_type, time_limit, start_time, 
+      end_time, restart_times, status, 
+      last_check_time, check_way, node_name, 
+      node_ip, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{podName,jdbcType=VARCHAR}, #{tpiId,jdbcType=VARCHAR}, 
+      #{podType,jdbcType=INTEGER}, #{timeLimit,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{restartTimes,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{lastCheckTime,jdbcType=TIMESTAMP}, #{checkWay,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, 
+      #{nodeIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.educoder.bridge.k8s.model.LongTask" >
+    insert into long_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="podName != null" >
+        pod_name,
+      </if>
+      <if test="tpiId != null" >
+        tpi_id,
+      </if>
+      <if test="podType != null" >
+        pod_type,
+      </if>
+      <if test="timeLimit != null" >
+        time_limit,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="restartTimes != null" >
+        restart_times,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastCheckTime != null" >
+        last_check_time,
+      </if>
+      <if test="checkWay != null" >
+        check_way,
+      </if>
+      <if test="nodeName != null" >
+        node_name,
+      </if>
+      <if test="nodeIp != null" >
+        node_ip,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="podName != null" >
+        #{podName,jdbcType=VARCHAR},
+      </if>
+      <if test="tpiId != null" >
+        #{tpiId,jdbcType=VARCHAR},
+      </if>
+      <if test="podType != null" >
+        #{podType,jdbcType=INTEGER},
+      </if>
+      <if test="timeLimit != null" >
+        #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restartTimes != null" >
+        #{restartTimes,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="lastCheckTime != null" >
+        #{lastCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkWay != null" >
+        #{checkWay,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null" >
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeIp != null" >
+        #{nodeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.educoder.bridge.k8s.model.LongTask" >
+    update long_task
+    <set >
+      <if test="podName != null" >
+        pod_name = #{podName,jdbcType=VARCHAR},
+      </if>
+      <if test="tpiId != null" >
+        tpi_id = #{tpiId,jdbcType=VARCHAR},
+      </if>
+      <if test="podType != null" >
+        pod_type = #{podType,jdbcType=INTEGER},
+      </if>
+      <if test="timeLimit != null" >
+        time_limit = #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restartTimes != null" >
+        restart_times = #{restartTimes,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="lastCheckTime != null" >
+        last_check_time = #{lastCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkWay != null" >
+        check_way = #{checkWay,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null" >
+        node_name = #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeIp != null" >
+        node_ip = #{nodeIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.educoder.bridge.k8s.model.LongTask" >
+    update long_task
+    set pod_name = #{podName,jdbcType=VARCHAR},
+      tpi_id = #{tpiId,jdbcType=VARCHAR},
+      pod_type = #{podType,jdbcType=INTEGER},
+      time_limit = #{timeLimit,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      restart_times = #{restartTimes,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      last_check_time = #{lastCheckTime,jdbcType=TIMESTAMP},
+      check_way = #{checkWay,jdbcType=VARCHAR},
+      node_name = #{nodeName,jdbcType=VARCHAR},
+      node_ip = #{nodeIp,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

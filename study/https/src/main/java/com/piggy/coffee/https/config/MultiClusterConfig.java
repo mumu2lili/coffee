@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.piggy.coffee.https.model.ClusterConfig;
 
-//@Component
+@Component
 @ConfigurationProperties("cluster")
 public class MultiClusterConfig {
 

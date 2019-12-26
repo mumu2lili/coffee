@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.educoder.bridge.sys.dao.ClusterConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.educoder.bridge.sys.model.ClusterConfig" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="master_url" property="masterUrl" jdbcType="VARCHAR" />
+    <result column="ca_cert_file" property="caCertFile" jdbcType="VARCHAR" />
+    <result column="client_cert_file" property="clientCertFile" jdbcType="VARCHAR" />
+    <result column="client_key_file" property="clientKeyFile" jdbcType="VARCHAR" />
+    <result column="oauth_token" property="oauthToken" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="kubeconfig" property="kubeconfig" jdbcType="VARCHAR" />
+    <result column="ssh_nodes" property="sshNodes" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, master_url, ca_cert_file, client_cert_file, client_key_file, oauth_token, 
+    username, password, kubeconfig, ssh_nodes, weight, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cluster_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cluster_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.educoder.bridge.sys.model.ClusterConfig" >
+    insert into cluster_config (id, name, master_url, 
+      ca_cert_file, client_cert_file, client_key_file, 
+      oauth_token, username, password, 
+      kubeconfig, ssh_nodes, weight, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{masterUrl,jdbcType=VARCHAR}, 
+      #{caCertFile,jdbcType=VARCHAR}, #{clientCertFile,jdbcType=VARCHAR}, #{clientKeyFile,jdbcType=VARCHAR}, 
+      #{oauthToken,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{kubeconfig,jdbcType=VARCHAR}, #{sshNodes,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.educoder.bridge.sys.model.ClusterConfig" >
+    insert into cluster_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="masterUrl != null" >
+        master_url,
+      </if>
+      <if test="caCertFile != null" >
+        ca_cert_file,
+      </if>
+      <if test="clientCertFile != null" >
+        client_cert_file,
+      </if>
+      <if test="clientKeyFile != null" >
+        client_key_file,
+      </if>
+      <if test="oauthToken != null" >
+        oauth_token,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="kubeconfig != null" >
+        kubeconfig,
+      </if>
+      <if test="sshNodes != null" >
+        ssh_nodes,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="masterUrl != null" >
+        #{masterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="caCertFile != null" >
+        #{caCertFile,jdbcType=VARCHAR},
+      </if>
+      <if test="clientCertFile != null" >
+        #{clientCertFile,jdbcType=VARCHAR},
+      </if>
+      <if test="clientKeyFile != null" >
+        #{clientKeyFile,jdbcType=VARCHAR},
+      </if>
+      <if test="oauthToken != null" >
+        #{oauthToken,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="kubeconfig != null" >
+        #{kubeconfig,jdbcType=VARCHAR},
+      </if>
+      <if test="sshNodes != null" >
+        #{sshNodes,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.educoder.bridge.sys.model.ClusterConfig" >
+    update cluster_config
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="masterUrl != null" >
+        master_url = #{masterUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="caCertFile != null" >
+        ca_cert_file = #{caCertFile,jdbcType=VARCHAR},
+      </if>
+      <if test="clientCertFile != null" >
+        client_cert_file = #{clientCertFile,jdbcType=VARCHAR},
+      </if>
+      <if test="clientKeyFile != null" >
+        client_key_file = #{clientKeyFile,jdbcType=VARCHAR},
+      </if>
+      <if test="oauthToken != null" >
+        oauth_token = #{oauthToken,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="kubeconfig != null" >
+        kubeconfig = #{kubeconfig,jdbcType=VARCHAR},
+      </if>
+      <if test="sshNodes != null" >
+        ssh_nodes = #{sshNodes,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.educoder.bridge.sys.model.ClusterConfig" >
+    update cluster_config
+    set name = #{name,jdbcType=VARCHAR},
+      master_url = #{masterUrl,jdbcType=VARCHAR},
+      ca_cert_file = #{caCertFile,jdbcType=VARCHAR},
+      client_cert_file = #{clientCertFile,jdbcType=VARCHAR},
+      client_key_file = #{clientKeyFile,jdbcType=VARCHAR},
+      oauth_token = #{oauthToken,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      kubeconfig = #{kubeconfig,jdbcType=VARCHAR},
+      ssh_nodes = #{sshNodes,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

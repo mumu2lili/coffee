@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 
 import io.fabric8.kubernetes.api.model.DoneablePod;
 import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.client.Config;
+import io.fabric8.kubernetes.client.ConfigBuilder;
+import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
@@ -23,7 +26,7 @@ public class ExecTest302 extends ClientTest {
 	@Test
 	public void test() throws InterruptedException {
 
-		this.test("/opt/a.sh");
+		this.test("/opt/b.sh");
 
 		// Thread.sleep(1000 * 5);
 	}
@@ -39,7 +42,7 @@ public class ExecTest302 extends ClientTest {
 			PipedOutputStream pos = new PipedOutputStream(pis);
 			PodResource<Pod, DoneablePod> podResource = client.pods().inNamespace("default").withName("hello");
 			ExecWatch watch = podResource.readingInput(in).writingOutput(pos).withTTY()
-					.usingListener(new SimpleListener(pos, "hello")).exec("sh", scriptPth);
+					.usingListener(new SimpleListener(pos, "hello")).exec("bash", scriptPth);
 
 			// manager.putExecTime(watch, 10);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(pis));
@@ -48,6 +51,9 @@ public class ExecTest302 extends ClientTest {
 			while ((line = reader.readLine()) != null) {
 				logger.info(line);
 				sb.append(line);
+				if(line.startsWith("c")) {
+					throw new RuntimeException("e!!!!!!!!!!!!");
+				}
 				sb.append(System.getProperty("line.separator"));
 				// Thread.sleep(5000);
 			}
@@ -109,5 +115,7 @@ public class ExecTest302 extends ClientTest {
 			}
 		}
 	}
+	
+
 
 }

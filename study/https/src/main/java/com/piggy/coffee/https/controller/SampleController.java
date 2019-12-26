@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.piggy.coffee.https.config.ListConfig;
 import com.piggy.coffee.https.config.MultiClusterConfig;
 
 @RestController
@@ -21,6 +22,9 @@ public class SampleController {
 	
 	@Autowired
 	private MultiClusterConfig multiClusterConfig;
+	
+	@Autowired
+	private ListConfig ListConfig;
 
 	@GetMapping("/hello")
 	public String helloWorld() {

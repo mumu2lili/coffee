@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.3.RELEASE</version>
+		<version>2.1.11.RELEASE</version>
 		<relativePath />
 	</parent>
 
@@ -22,7 +22,9 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+		
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		
 		<!-- Ordinary dependencies -->
 		<!-- spring cloud -->
 		<cloud.version>Edgware.SR4</cloud.version>
@@ -197,7 +199,7 @@
 											spring-boot-maven-plugin
 										</artifactId>
 										<versionRange>
-											[2.0.3.RELEASE,)
+											[2.1.11.RELEASE,)
 										</versionRange>
 										<goals>
 											<goal>build-info</goal>

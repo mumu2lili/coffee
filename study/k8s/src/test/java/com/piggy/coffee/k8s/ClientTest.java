@@ -19,6 +19,7 @@ public class ClientTest {
 				.withClientCertFile(certDir + "admin.pem").withClientKeyFile(certDir + "admin-key.pem")
 				.withOauthToken("aa1d522ad080f2f893ea87252d5d1588").build();
 		client = new DefaultKubernetesClient(config);
+
 	}
 
 	@After

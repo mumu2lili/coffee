@@ -17,8 +17,20 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+
+		<dependency>
 			<groupId>com.piggy.coffee</groupId>
 			<artifactId>coffee-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.piggy.coffee</groupId>
+			<artifactId>coffee-logtool</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

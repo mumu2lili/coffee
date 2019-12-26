@@ -57,11 +57,11 @@
 						<artifactId>mysql-connector-java</artifactId>
 						<version>5.1.39</version>
 					</dependency>
-					<dependency>
+<!-- 					<dependency>
 						<groupId>com.oracle</groupId>
 						<artifactId>ojdbc</artifactId>
 						<version>jdk8</version>
-					</dependency>
+					</dependency> -->
 				</dependencies>
 			</plugin>
 		</plugins>

@@ -22,6 +22,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.piggy.coffee</groupId>
+			<artifactId>coffee-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>

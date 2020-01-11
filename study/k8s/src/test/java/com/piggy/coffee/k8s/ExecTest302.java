@@ -20,7 +20,7 @@ import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
 import okhttp3.Response;
 
-public class ExecTest302 extends ClientTest {
+public class ExecTest302 extends ClientTimeoutTest {
 	private Logger logger = LoggerFactory.getLogger(ExecTest302.class);
 
 	@Test

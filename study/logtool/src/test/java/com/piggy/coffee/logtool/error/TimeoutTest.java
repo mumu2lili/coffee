@@ -1,6 +1,6 @@
 package com.piggy.coffee.logtool.error;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 
 import com.piggy.coffee.common.util.Base64Util;
+import com.piggy.coffee.common.util.shell.ShellExeResult;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +19,78 @@ public class TimeoutTest {
 
 	private Logger log = LoggerFactory.getLogger(getClass());
 
+	public static String executeCommand(String command, File file) throws IOException {
+		StringBuffer output = new StringBuffer();
+		Process p = null;
+		if (!file.exists()){
+			file.mkdir();
+		}
+		try {
+			p =Runtime.getRuntime().exec(command, null, file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			p.waitFor();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		try (InputStreamReader inputStreamReader = new InputStreamReader(p.getInputStream(), "GBK");
+			 BufferedReader reader = new BufferedReader(inputStreamReader);){
+			String line = "";
+			while (true) {
+				try {
+					if (!((line = reader.readLine()) != null)) break;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				output.append(line + "\n");
+			}
+		}
+		System.out.println(output.toString());
+		return output.toString();
+
+	}
+
+	@Test
+	public void getCode() {
+		try {
+			try(BufferedReader reader = new BufferedReader(new FileReader(new File("gitUrl.txt")))) {
+				String gitUrl ;
+				while ((gitUrl = reader.readLine())!=null) {
+					System.out.println(gitUrl);
+					String command = "git clone "+gitUrl;
+					String output = null;
+					try {
+						output = executeCommand(command, new File("F:/overtime"));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					System.out.println(output);
+				}
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	@Test
 	public void testTimeout() throws IOException {
 
 		Map<String, EvaluatingAssayParam> reqMap = new HashMap<>();
 		String logFile = null;
-		logFile = "D:\\mumu\\company\\zhi_log\\bridge01_201911\\bridge.2019-11-27.log";
+		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
 		this.extractReq(reqMap, logFile);
-		logFile = "D:\\mumu\\company\\zhi_log\\bridge02_201911\\bridge.2019-11-27.log";
+		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
 		this.extractReq(reqMap, logFile);
-
 		Map<LocalDateTime, EvaluatingAssayParam> timeoutMap = new TreeMap<>();
-		logFile = "D:\\mumu\\company\\zhi_log\\bridge01_201911\\bridge.2019-11-27.log";
+		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
 		this.extractTimeout(timeoutMap, reqMap, logFile);
-		logFile = "D:\\mumu\\company\\zhi_log\\bridge02_201911\\bridge.2019-11-27.log";
+		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
 		this.extractTimeout(timeoutMap, reqMap, logFile);
+
+		try(PrintWriter pw = new PrintWriter(new File("gitUrl.txt"))){
+
 
 		// log.info("超时！！！！！！！");
 		for (Iterator<Entry<LocalDateTime, EvaluatingAssayParam>> iter = timeoutMap.entrySet().iterator(); iter
@@ -40,10 +98,13 @@ public class TimeoutTest {
 			Entry<LocalDateTime, EvaluatingAssayParam> entry = iter.next();
 			EvaluatingAssayParam param = entry.getValue();
 			parse(param);
-			log.info(
-					"{\"tpiID\":\"{}\",\"podType\":{},\"instanceChallenge\":\"{}\",\"timeLimit\":{},\"evaluateStartTime\":\"{}\",\"evaluateEndTime\":\"{}\",\"gitUrl\":\"{}\"}",
-					param.tpiID, param.podType, param.instanceChallenge, param.timeLimit, param.evaluateStartTime,
-					param.evaluateEndTime, param.gitUrl);
+			pw.println(param.gitUrl);
+//			log.info(
+//					"{\"tpiID\":\"{}\",\"podType\":{},\"instanceChallenge\":\"{}\",\"timeLimit\":{},\"evaluateStartTime\":\"{}\",\"evaluateEndTime\":\"{}\",\"gitUrl\":\"{}\"}",
+//					param.tpiID, param.podType, param.instanceChallenge, param.timeLimit, param.evaluateStartTime,
+//					param.evaluateEndTime, param.gitUrl);
+		}
+
 		}
 		// log.info("超时数量：" + timeoutMap.size());
 	}

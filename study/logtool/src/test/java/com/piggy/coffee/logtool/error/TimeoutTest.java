@@ -5,13 +5,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.function.Consumer;
 
+import com.piggy.coffee.common.util.Base64Util;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,9 +41,9 @@ public class TimeoutTest {
 			EvaluatingAssayParam param = entry.getValue();
 			parse(param);
 			log.info(
-					"{\"tpiID\":\"{}\",\"podType\":{},\"instanceChallenge\":\"{}\",\"timeLimit\":{},\"evaluateStartTime\":\"{}\",\"evaluateEndTime\":\"{}\"}",
+					"{\"tpiID\":\"{}\",\"podType\":{},\"instanceChallenge\":\"{}\",\"timeLimit\":{},\"evaluateStartTime\":\"{}\",\"evaluateEndTime\":\"{}\",\"gitUrl\":\"{}\"}",
 					param.tpiID, param.podType, param.instanceChallenge, param.timeLimit, param.evaluateStartTime,
-					param.evaluateEndTime);
+					param.evaluateEndTime, param.gitUrl);
 		}
 		// log.info("超时数量：" + timeoutMap.size());
 	}
@@ -70,7 +68,7 @@ public class TimeoutTest {
 	}
 
 	private void extractTimeout(Map<LocalDateTime, EvaluatingAssayParam> timeoutMap,
-			Map<String, EvaluatingAssayParam> reqMap, String logFile) throws IOException {
+								Map<String, EvaluatingAssayParam> reqMap, String logFile) throws IOException {
 
 		Files.lines(Paths.get(logFile), StandardCharsets.UTF_8).forEach(new Consumer<String>() {
 
@@ -85,7 +83,7 @@ public class TimeoutTest {
 					if (param == null) {
 						return;
 					}
-					String timeStr = "2019-" + line.substring(0, 14);
+					String timeStr = "2020-" + line.substring(0, 14);
 					timeStr = timeStr.replace(" ", "T");
 					LocalDateTime time = LocalDateTime.parse(timeStr);
 					param.res = line;
@@ -105,6 +103,11 @@ public class TimeoutTest {
 		tmp = tmp.substring(begin);
 		int end = tmp.indexOf(",");
 		param.tpiID = tmp.substring(0, end);
+
+		begin = tmp.indexOf("tpiGitURL: ") + "tpiGitURL: ".length();
+		tmp = tmp.substring(begin);
+		end = tmp.indexOf(",");
+		param.gitUrl = Base64Util.decode(tmp.substring(0, end)).replace("http://172.16.94.154:9000", "https://git.educoder.net");
 
 		begin = tmp.indexOf("instanceChallenge: ") + "instanceChallenge: ".length();
 		tmp = tmp.substring(begin);
@@ -126,7 +129,7 @@ public class TimeoutTest {
 		 */
 		tmp = param.res;
 
-		begin = tmp.indexOf("evaluateEnd\\\":\\\"") + "evaluateEnd\\\":\\\"".length();
+		begin = tmp.indexOf("evaluateEndTime\\\":\\\"") + "evaluateEndTime\\\":\\\"".length();
 		tmp = tmp.substring(begin);
 		end = tmp.indexOf("\\");
 		String time = tmp.substring(0, end);

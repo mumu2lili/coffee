@@ -9,6 +9,7 @@ class EvaluatingAssayParam {
 	public Integer timeLimit;
 	public String evaluateStartTime;
 	public String evaluateEndTime;
+	public String gitUrl;
 	/**
 	 * 原始req
 	 */

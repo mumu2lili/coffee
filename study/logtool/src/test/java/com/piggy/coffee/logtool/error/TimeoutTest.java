@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 
 import com.piggy.coffee.common.util.Base64Util;
 import com.piggy.coffee.common.util.shell.ShellExeResult;
+import com.piggy.coffee.common.util.shell.ShellUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,18 +59,18 @@ public class TimeoutTest {
 			try(BufferedReader reader = new BufferedReader(new FileReader(new File("gitUrl.txt")))) {
 				String gitUrl ;
 				while ((gitUrl = reader.readLine())!=null) {
-					System.out.println(gitUrl);
-					String command = "git clone "+gitUrl;
-					String output = null;
+					gitUrl = gitUrl.split("//")[0] + "//" + gitUrl.split("//")[1];
+					String command = "cd /data/overtime && git clone "+ gitUrl;
 					try {
-						output = executeCommand(command, new File("F:/overtime"));
-					} catch (IOException e) {
+						ShellExeResult result = ShellUtils.executeAndGetExitStatus(command);
+						if (result.getExitStatus() != 0) {
+							System.out.println("clone失败 gitUrl: " + gitUrl + " output: " + result.getOut());
+						}
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					System.out.println(output);
 				}
 			}
-
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -79,14 +80,14 @@ public class TimeoutTest {
 
 		Map<String, EvaluatingAssayParam> reqMap = new HashMap<>();
 		String logFile = null;
-		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
+		logFile = "/Users/macbookpro/Documents/bridge.2020-05-04.log";
 		this.extractReq(reqMap, logFile);
-		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
+		logFile = "/Users/macbookpro/Documents/bridge.2020-05-04.log";
 		this.extractReq(reqMap, logFile);
 		Map<LocalDateTime, EvaluatingAssayParam> timeoutMap = new TreeMap<>();
-		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
+		logFile = "/Users/macbookpro/Documents/bridge.2020-05-04.log";
 		this.extractTimeout(timeoutMap, reqMap, logFile);
-		logFile = "F:\\智擎coffee\\死循环\\超时代码\\bridge.2020-05-04.log";
+		logFile = "/Users/macbookpro/Documents/bridge.2020-05-04.log";
 		this.extractTimeout(timeoutMap, reqMap, logFile);
 
 		try(PrintWriter pw = new PrintWriter(new File("gitUrl.txt"))){

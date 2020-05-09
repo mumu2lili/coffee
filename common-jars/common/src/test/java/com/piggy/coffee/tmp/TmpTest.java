@@ -11,17 +11,21 @@ public class TmpTest {
 
 	@Test
 	public void test() {
-		Assert.assertEquals(false, false);
-
-		String str = "hello world";
-
-		String md5 = getMD5(str);
-
-		System.out.println(md5);
-
-		md5 = DigestUtils.md5Hex(str);
-
-		System.out.println(md5);
+		long t = System.currentTimeMillis();
+	        // 请在下面的Begin-End之间按照注释中给出的提示编写正确的代码
+	        /********** Begin **********/
+	        // 第一步：获取键盘三次输入的值
+	        double a = 3;
+	        double b = 4;
+	        double c = 5;
+	        // 第二步：根据三角形面积公式求取三角形面积
+	        double p = 0.5*(a+b+c);
+	        double s= Math.sqrt(p*(p-a)*(p-b)*(p-c));
+	        // 第三步：格式化输出三角形的面积
+	        System.out.printf("三角形的面积为：%.2f",s);
+	        /********** End **********/
+	    	System.out.println();
+	    	System.out.println(System.currentTimeMillis() - t);
 	}
 
 	public String getMD5(String src) {

@@ -8,7 +8,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.ConnectionClosedException;
@@ -21,7 +20,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.nio.client.BridgeHttpAsyncClientBuilder;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,7 +92,7 @@ public class NioHttpClientUtils {
 	 *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
 	 * @return 所代表远程资源的响应结果
 	 */
-	public static String sendPost(String url, Map param) {
+	public static String sendPost(String url, Map<String, Object> param) {
 		long currentTimeMillis = System.currentTimeMillis();
 		String result = "";
 		try {
@@ -122,7 +120,7 @@ public class NioHttpClientUtils {
 			CloseableHttpAsyncClient httpclient = BridgeHttpAsyncClientBuilder.create()
 					.setDefaultRequestConfig(requestConfig).setBodyLength(entity.getContentLength()).build();
 			httpclient.start();
-			Future<HttpResponse> future = httpclient.execute(request, new FutureCallback<HttpResponse>() {
+			httpclient.execute(request, new FutureCallback<HttpResponse>() {
 
 				@Override
 				public void failed(Exception ex) {
@@ -174,7 +172,7 @@ public class NioHttpClientUtils {
 	 *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
 	 * @return 所代表远程资源的响应结果
 	 */
-	public static String sendPost(String url, Map param, int readTimeOut) {
+	public static String sendPost(String url, Map<String, Object> param, int readTimeOut) {
 		long currentTimeMillis = System.currentTimeMillis();
 		String result = "";
 		try {
@@ -203,7 +201,7 @@ public class NioHttpClientUtils {
 			CloseableHttpAsyncClient httpclient = BridgeHttpAsyncClientBuilder.create()
 					.setDefaultRequestConfig(requestConfig).setBodyLength(entity.getContentLength()).build();
 			httpclient.start();
-			Future<HttpResponse> future = httpclient.execute(request, new FutureCallback<HttpResponse>() {
+			httpclient.execute(request, new FutureCallback<HttpResponse>() {
 
 				@Override
 				public void failed(Exception ex) {

@@ -42,4 +42,12 @@ public class SampleController {
 		log.info("收到请求 {}", command);
 		return command;
 	}
+	
+	@GetMapping("/test3")
+	public String test3(@RequestParam String command) {
+
+		log.info("收到请求 {}", command);
+		log.error("收到请求 {}", command);
+		return command;
+	}
 }

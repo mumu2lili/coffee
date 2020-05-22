@@ -8,10 +8,23 @@
 		</encoder>
 	</appender>
 
-
+	<appender name="error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/bridge.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
 
 	<root level="info">
 		<appender-ref ref="STDOUT" />
+		<appender-ref ref="error" />
 	</root>
 
 </configuration>

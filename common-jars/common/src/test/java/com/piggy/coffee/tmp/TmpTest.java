@@ -11,6 +11,7 @@ public class TmpTest {
 
 	@Test
 	public void test() {
+    	System.out.println(Integer.MAX_VALUE);
 		long t = System.currentTimeMillis();
 	        // 请在下面的Begin-End之间按照注释中给出的提示编写正确的代码
 	        /********** Begin **********/

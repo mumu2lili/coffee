@@ -23,7 +23,7 @@ public class TmpTest {
 	        double p = 0.5*(a+b+c);
 	        double s= Math.sqrt(p*(p-a)*(p-b)*(p-c));
 	        // 第三步：格式化输出三角形的面积
-	        System.out.printf("三角形的面积为：%.2f",s);
+	        System.out.printf("A三角形的面积为：%.2f",s);
 	        /********** End **********/
 	    	System.out.println();
 	    	System.out.println(System.currentTimeMillis() - t);

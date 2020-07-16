@@ -7,6 +7,7 @@ package com.piggy.coffee.common.util.json;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -31,6 +32,16 @@ public final class JsonUtils {
 
 		try {
 			T t = mapper.readValue(content, clazz);
+			return t;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static <T> T toBean(String content, TypeReference<T> valueTypeRef) {
+
+		try {
+			T t = mapper.readValue(content, valueTypeRef);
 			return t;
 		} catch (IOException e) {
 			throw new RuntimeException(e);

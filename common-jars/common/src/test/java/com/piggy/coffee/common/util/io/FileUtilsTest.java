@@ -1,4 +1,4 @@
-package com.piggy.coffee.common.io;
+package com.piggy.coffee.common.util.io;
 
 import java.util.Iterator;
 import java.util.Set;

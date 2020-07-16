@@ -69,7 +69,7 @@ public class NioHttpClientUtilsTest2 {
 
 		}
 
-		Thread.currentThread().sleep(5 * 1000);
+		Thread.sleep(5 * 1000);
 
 		for (int i = 0; i < 100; i++) {
 			new Thread(new Runnable() {
@@ -83,7 +83,7 @@ public class NioHttpClientUtilsTest2 {
 
 		}
 
-		Thread.currentThread().sleep(5 * 1000);
+		Thread.sleep(5 * 1000);
 		NioHttpClientUtils2.close(client);
 	}
 	

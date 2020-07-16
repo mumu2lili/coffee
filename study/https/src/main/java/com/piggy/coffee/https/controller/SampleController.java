@@ -1,5 +1,6 @@
 package com.piggy.coffee.https.controller;
 
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.piggy.coffee.common.model.ApiResult;
 
 @RestController
 public class SampleController {
@@ -34,6 +37,19 @@ public class SampleController {
 		int times = testTimes.incrementAndGet();
 		log.info("第{}次收到请求 {}", times, content);
 		return content;
+	}
+	
+	@PostMapping("/test2")
+	public ApiResult<String> test12(@RequestBody Map<String,Object> content) {
+
+        ApiResult<String> r = new ApiResult<>();
+
+		int times = testTimes.incrementAndGet();
+		log.info("第{}次收到请求 {}", times, content);
+		
+		r.setData("aa");
+		r.setMsg("ok");
+		return r;
 	}
 
 	@GetMapping("/test2")

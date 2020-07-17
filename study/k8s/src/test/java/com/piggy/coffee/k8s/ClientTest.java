@@ -13,6 +13,10 @@ public class ClientTest {
 
 	@Before
 	public void setUp() throws Exception {
+		withCertFile();
+	}
+
+	void withCertFile() {
 		String certDir = "D:\\mumu\\note\\cloud\\k8s\\k8s_auth\\";
 		Config config = new ConfigBuilder().withMasterUrl("https://192.168.56.101:6443").withNamespace("default")
 				.withTrustCerts(true).withCaCertFile(certDir + "k8s-root-ca.pem")
@@ -20,6 +24,12 @@ public class ClientTest {
 				.withOauthToken("aa1d522ad080f2f893ea87252d5d1588").build();
 		client = new DefaultKubernetesClient(config);
 
+	}
+
+	void withCertData() {
+		Config config = new ConfigBuilder().withMasterUrl("https://192.168.56.101:6443").withNamespace("default")
+				.withTrustCerts(true).withCaCertData("").withClientCertData("").withClientKeyData("").build();
+		client = new DefaultKubernetesClient(config);
 	}
 
 	@After

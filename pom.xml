@@ -39,6 +39,7 @@
 		
 		<module>common-jars/common</module>
 		<module>common-jars/model</module>	
+		<module>common-jars/aviator</module>	
 		
 		<module>study/designpattern</module>
 		<module>study/syntax</module>

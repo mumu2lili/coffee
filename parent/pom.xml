@@ -22,9 +22,9 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-		
+
 		<!-- Ordinary dependencies -->
 		<!-- spring cloud -->
 		<cloud.version>Edgware.SR4</cloud.version>
@@ -41,6 +41,10 @@
 		<commons-lang3.version>3.7</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-fileupload.version>1.3.2</commons-fileupload.version>
+
+		<!-- -->
+		<aviator.version>5.1.0</aviator.version>
+
 		<!-- log -->
 		<slf4j.version>1.7.25</slf4j.version>
 		<logback.version>1.2.3</logback.version>
@@ -114,13 +118,19 @@
 				<artifactId>commons-fileupload</artifactId>
 				<version>${commons-fileupload.version}</version>
 			</dependency>
-			
+
+			<dependency>
+				<groupId>com.googlecode.aviator</groupId>
+				<artifactId>aviator</artifactId>
+				<version>${aviator.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
@@ -236,31 +246,13 @@
 				</configuration>
 			</plugin>
 
-<!-- 加profile -->
-<!-- 			<plugin>
-				<groupId>com.github.spotbugs</groupId>
-				<artifactId>spotbugs-maven-plugin</artifactId>
-				<version>3.1.3</version>
-				<configuration>
-					<effort>Max</effort>
-					<threshold>Low</threshold>
-					<xmlOutput>false</xmlOutput>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>com.github.spotbugs</groupId>
-						<artifactId>spotbugs</artifactId>
-						<version>3.1.3</version>
-					</dependency>
-				</dependencies>
-			</plugin> -->
+			<!-- 加profile -->
+			<!-- <plugin> <groupId>com.github.spotbugs</groupId> <artifactId>spotbugs-maven-plugin</artifactId> 
+				<version>3.1.3</version> <configuration> <effort>Max</effort> <threshold>Low</threshold> 
+				<xmlOutput>false</xmlOutput> </configuration> <executions> <execution> <goals> 
+				<goal>check</goal> </goals> </execution> </executions> <dependencies> <dependency> 
+				<groupId>com.github.spotbugs</groupId> <artifactId>spotbugs</artifactId> 
+				<version>3.1.3</version> </dependency> </dependencies> </plugin> -->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -340,28 +332,12 @@
 			<id>central2</id>
 			<url>http://mvnrepository.com</url>
 		</repository>
-		<!-- <repository>
-			<id>spring-milestones</id>
-			<url>http://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-snapshots</id>
-			<url>http://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>central</id>
-			<url>http://repo.maven.apache.org/maven2</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository> -->
+		<!-- <repository> <id>spring-milestones</id> <url>http://repo.spring.io/milestone</url> 
+			<snapshots> <enabled>true</enabled> </snapshots> </repository> <repository> 
+			<id>spring-snapshots</id> <url>http://repo.spring.io/snapshot</url> <snapshots> 
+			<enabled>true</enabled> </snapshots> </repository> <repository> <id>central</id> 
+			<url>http://repo.maven.apache.org/maven2</url> <layout>default</layout> <snapshots> 
+			<enabled>false</enabled> </snapshots> </repository> -->
 	</repositories>
 
 	<pluginRepositories />

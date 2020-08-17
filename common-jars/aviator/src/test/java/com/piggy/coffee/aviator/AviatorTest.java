@@ -18,6 +18,14 @@ public class AviatorTest {
 		System.out.println(AviatorEvaluator.execute("1 + 2 + 3"));
 
 	}
+	
+	@Test
+	public void test2() {
+
+		System.out.println(AviatorEvaluator.execute("1 < 2 && -2 < 3"));
+
+	}
+
 
 	@Test
 	public void testArr() {
@@ -26,6 +34,25 @@ public class AviatorTest {
 		env.put("a", a);
 
 		System.out.println(AviatorEvaluator.execute("a[1] + 100", env));
+	}
+	
+	
+	@Test
+	public void testString() {
+		int[] a = new int[] { 6, 7, 8, 9 };
+		Map<String, Object> env = new HashMap<String, Object>();
+		env.put("a", a);
+
+		System.out.println(AviatorEvaluator.execute("string.endsWith('aab', math.abs(2+'1'))", env));
+	}
+	
+	@Test
+	public void testString2s() {
+		int[] a = new int[] { 6, 7, 8, 9 };
+		Map<String, Object> env = new HashMap<String, Object>();
+		env.put("a", a);
+
+		System.out.println(AviatorEvaluator.execute("string.contains('aabcd', 'ab')", env));
 	}
 	
 	@Test
@@ -71,7 +98,7 @@ public class AviatorTest {
 	public void testListCmp_Tab() throws IllegalAccessException, NoSuchMethodException {
 		Map<String, Object> env = new HashMap<String, Object>();
         env.put("expect", "1	2	3");
-        env.put("actual", "1.01	2.01	3.01");
+        env.put("actual", "1.01	2.01	  3.01");
     
         AviatorEvaluator.addFunction(new ListCmpFunction());
         boolean result = (boolean)AviatorEvaluator.execute("list.cmp('math.abs(expect - actual) < 0.1', '	')", env);

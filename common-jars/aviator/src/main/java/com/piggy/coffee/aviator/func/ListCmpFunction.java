@@ -93,7 +93,7 @@ public class ListCmpFunction extends AbstractFunction {
 
 	@Override
 	public String getName() {
-		return "list.cmp";
+		return "list.forEach";
 	}
 
 }

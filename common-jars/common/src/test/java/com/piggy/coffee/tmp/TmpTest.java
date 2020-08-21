@@ -22,6 +22,9 @@ public class TmpTest {
 		double d2 = Math.abs(6 * Math.pow(2.71828183, 4.377021) - 113 * 4.377021 + 17);
 		System.out.println(d);
 		System.out.println(d2);
+		
+		System.out.println(Math.abs(d) < 0.00001);
+		System.out.println(Math.abs(d2) < 0.00001);
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package com.piggy.coffee.aviator;
 
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.googlecode.aviator.AviatorEvaluator;
+import com.googlecode.aviator.Options;
 import com.piggy.coffee.aviator.func.ListCmpFunction;
 
 public class AviatorTest {
@@ -122,7 +124,7 @@ public class AviatorTest {
 
 		AviatorEvaluator.addFunction(new ListCmpFunction());
 		boolean result = (boolean) AviatorEvaluator.execute(
-				"list.forEach( ' math.abs(6*math.pow(2.718281828459045,actual)-113e*actual+17e)<=0.00001', '\r\n' )",
+				"list.forEach( ' math.abs(6*math.pow(2.718281828459045,actual)-113*actual+17)<=0.00001', '\r\n' )",
 				env);
 		System.out.println(result);
 
@@ -134,8 +136,51 @@ public class AviatorTest {
 		env.put("expect", 1);
 		env.put("actual", 0.216366);
 
+		AviatorEvaluator.setOption(Options.MATH_CONTEXT, MathContext.DECIMAL64);
 		AviatorEvaluator.addFunction(new ListCmpFunction());
-		double result = (double) AviatorEvaluator.execute("6M*math.pow(2.718281828459045M,actual)-113M*actual+17M",
+		double result = (double) AviatorEvaluator.execute("6*math.pow(2.718281828459045,actual)-113*actual+17",
+				env);
+		System.out.println(result);
+
+	}
+	
+	@Test
+	public void testListForEach_line4() throws IllegalAccessException, NoSuchMethodException {
+		Map<String, Object> env = new HashMap<String, Object>();
+		env.put("expect", 1);
+		env.put("actual", 0.216366);
+		env.put("actual", 4.377021);
+		//double d2 = Math.abs(6 * Math.pow(2.718281828459045, 4.377021) - 113 * 4.377021 + 17);
+		AviatorEvaluator.addFunction(new ListCmpFunction());
+		double result = (double) AviatorEvaluator.execute("6*math.pow(2.718281828459045,0.216366)-113*0.216366+17",
+				env);
+		System.out.println(result);
+
+	}
+	
+	@Test
+	public void testListForEach_line5() throws IllegalAccessException, NoSuchMethodException {
+		Map<String, Object> env = new HashMap<String, Object>();
+		env.put("expect", 1);
+		env.put("actual", 0.216366);
+		env.put("actual", 4.377021);
+		//double d2 = Math.abs(6 * Math.pow(2.718281828459045, 4.377021) - 113 * 4.377021 + 17);
+		AviatorEvaluator.addFunction(new ListCmpFunction());
+		double result = (double) AviatorEvaluator.execute(" math.abs(6*math.pow(2.718281828459045,0.216366)-113*0.216366+17)",
+				env);
+		System.out.println(result);
+
+	}
+	
+	@Test
+	public void testListForEach_line6() throws IllegalAccessException, NoSuchMethodException {
+		Map<String, Object> env = new HashMap<String, Object>();
+		env.put("expect", 1);
+		env.put("actual", 0.216366);
+		env.put("actual", 4.377021);
+		//double d2 = Math.abs(6 * Math.pow(2.718281828459045, 4.377021) - 113 * 4.377021 + 17);
+		AviatorEvaluator.addFunction(new ListCmpFunction());
+		boolean result = (boolean) AviatorEvaluator.execute(" math.abs(6*math.pow(2.718281828459045,0.216366)-113*0.216366+17) <=0.00001",
 				env);
 		System.out.println(result);
 

@@ -15,7 +15,7 @@ public class AviatorTest {
 	@Test
 	public void test() {
 
-		System.out.println(AviatorEvaluator.execute("1 + 2 + 3"));
+		System.out.println(AviatorEvaluator.execute("1 * 2 * 3"));
 
 	}
 
@@ -103,8 +103,8 @@ public class AviatorTest {
 		Map<String, Object> env = new HashMap<String, Object>();
 		env.put("expect",
 				"1" + System.getProperty("line.separator") + "2" + System.getProperty("line.separator") + "3");
-		env.put("actual",
-				"1.01" + System.getProperty("line.separator") + "2.01" + System.getProperty("line.separator") + "3.01");
+		env.put("actual", "1.01" + System.getProperty("line.separator") + "2.01" + System.getProperty("line.separator")
+				+ "3.01 " + System.getProperty("line.separator"));
 
 		AviatorEvaluator.addFunction(new ListCmpFunction());
 		boolean result = (boolean) AviatorEvaluator.execute("list.forEach('math.abs(expect - actual) < 0.1', '\r\n')",
@@ -113,4 +113,31 @@ public class AviatorTest {
 
 	}
 
+	@Test
+	public void testListForEach_line2() throws IllegalAccessException, NoSuchMethodException {
+		Map<String, Object> env = new HashMap<String, Object>();
+		String s = System.getProperty("line.separator");
+		env.put("expect", "1" + s + "2");
+		env.put("actual", "0.216366" + s + "4.377021");
+
+		AviatorEvaluator.addFunction(new ListCmpFunction());
+		boolean result = (boolean) AviatorEvaluator.execute(
+				"list.forEach( ' math.abs(6*math.pow(2.718281828459045,actual)-113e*actual+17e)<=0.00001', '\r\n' )",
+				env);
+		System.out.println(result);
+
+	}
+
+	@Test
+	public void testListForEach_line3() throws IllegalAccessException, NoSuchMethodException {
+		Map<String, Object> env = new HashMap<String, Object>();
+		env.put("expect", 1);
+		env.put("actual", 0.216366);
+
+		AviatorEvaluator.addFunction(new ListCmpFunction());
+		double result = (double) AviatorEvaluator.execute("6M*math.pow(2.718281828459045M,actual)-113M*actual+17M",
+				env);
+		System.out.println(result);
+
+	}
 }

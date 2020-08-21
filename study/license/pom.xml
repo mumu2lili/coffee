@@ -38,7 +38,6 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpasyncclient</artifactId>
-			<version>4.1.4</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.httpcomponents</groupId>
@@ -49,13 +48,21 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.5</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>de.schlichtherle.truelicense</groupId>
+			<artifactId>truelicense-core</artifactId>
+			<version>1.33</version>
+			<scope>provided</scope>
+		</dependency>
+
 <!-- 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency> -->
+			<groupId>net.java.truelicense</groupId>
+			<artifactId>truelicense-core</artifactId>
+			<version>2.6.6</version>
+		</dependency>
+ -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

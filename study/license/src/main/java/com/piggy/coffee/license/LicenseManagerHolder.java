@@ -10,9 +10,9 @@ public class LicenseManagerHolder {
 
     private static LicenseManager licenseManager;
 
-    public static synchronized LicenseManager getLicenseManager(LicenseParam licenseParams) {
+    public static synchronized LicenseManager getLicenseManager(LicenseParam licenseParam) {
         if (licenseManager == null) {
-            licenseManager = new LicenseManager(licenseParams);
+            licenseManager = new LicenseManager(licenseParam);
         }
         return licenseManager;
     }

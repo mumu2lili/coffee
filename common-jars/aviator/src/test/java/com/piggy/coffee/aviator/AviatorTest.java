@@ -149,10 +149,10 @@ public class AviatorTest {
 		Map<String, Object> env = new HashMap<String, Object>();
 		env.put("expect", 1);
 		env.put("actual", 0.216366);
-		env.put("actual", 4.377021);
+		env.put("actual", 4.3770211935043335);
 		//double d2 = Math.abs(6 * Math.pow(2.718281828459045, 4.377021) - 113 * 4.377021 + 17);
 		AviatorEvaluator.addFunction(new ListCmpFunction());
-		double result = (double) AviatorEvaluator.execute("6*math.pow(2.718281828459045,0.216366)-113*0.216366+17",
+		double result = (double) AviatorEvaluator.execute("6*math.pow(2.718281828459045,actual)-113*actual+17",
 				env);
 		System.out.println(result);
 
@@ -163,10 +163,10 @@ public class AviatorTest {
 		Map<String, Object> env = new HashMap<String, Object>();
 		env.put("expect", 1);
 		env.put("actual", 0.216366);
-		env.put("actual", 4.377021);
+		env.put("actual", 4.3770211935043335);
 		//double d2 = Math.abs(6 * Math.pow(2.718281828459045, 4.377021) - 113 * 4.377021 + 17);
 		AviatorEvaluator.addFunction(new ListCmpFunction());
-		double result = (double) AviatorEvaluator.execute(" math.abs(6*math.pow(2.718281828459045,0.216366)-113*0.216366+17)",
+		double result = (double) AviatorEvaluator.execute(" math.abs(6*math.pow(2.718281828459045,actual)-113*actual+17)",
 				env);
 		System.out.println(result);
 

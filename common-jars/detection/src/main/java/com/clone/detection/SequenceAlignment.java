@@ -98,8 +98,23 @@ public class SequenceAlignment {
                 }
             }
         }
+        
+        printM(scoreMatrix,"scoreMatrix...");
+        printM(preMatrix,"preMatrix...");
         backtracking(scoreMatrix, preMatrix, maxI, maxJ);
     }
+    
+    
+    void printM(int[][] m, String msg) {
+    	System.out.println(msg);
+    	for(int i = 0; i < m.length; i++) {
+    		for(int j = 0; j < m[i].length; j++) {
+    			System.out.print("\t" + m[i][j]);
+    		}
+    		System.out.println();
+    	}
+    }
+    
 
     /**
      * 回溯

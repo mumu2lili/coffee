@@ -1,11 +1,17 @@
 package com.piggy.coffee.license.mgr;
 
 import java.security.cert.X509Certificate;
+import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.piggy.coffee.common.util.net.NetUtils;
+import com.piggy.coffee.common.util.net.NetUtils.BridgeNetDevice;
+import com.piggy.coffee.license.model.BridgeGrantInfo;
+import com.piggy.coffee.license.model.BridgeHost;
 import com.piggy.coffee.license.model.BridgeLicense;
 import com.piggy.coffee.license.util.CertUtils;
 import com.piggy.coffee.license.util.LicenseUtils;
@@ -51,15 +57,14 @@ public class LicenseMgr {
 	 */
 	public void verifyLicense(String licensePath) {
 		try {
-			verifyLicenseInnter(licensePath);
-			validLicense = true;
+			validLicense = verifyLicenseInnter(licensePath);
 		} catch (Exception e) {
 			validLicense = false;
 			logger.error(e.getMessage());
 		}
 	}
 
-	public void verifyLicenseInnter(String licensePath) {
+	public boolean verifyLicenseInnter(String licensePath) {
 		BridgeLicense license = LicenseUtils.readLicense(licensePath);
 		X509Certificate cert = license.getCert();
 
@@ -74,8 +79,25 @@ public class LicenseMgr {
 		CertUtils.checkValidity(cert);
 
 		// 验证自定义信息
-		// 暂无
+		BridgeGrantInfo info = license.getInfo();
+		List<BridgeHost> hostList = info.getBridgeHosts();// 许可的主机
+		if (!hostList.isEmpty()) {// 需要验证 mac 或者 ip
+			List<BridgeNetDevice> devList = NetUtils.getNetDevices();
+			// 本机网络设备匹配到任何一个许可的设备，即通过
+			for (BridgeNetDevice dev : devList) {
+				for (BridgeHost host : hostList) {
+					boolean ipMatch = StringUtils.isBlank(host.getIp()) || host.getIp().equals(dev.ip);
+					boolean macMatch = StringUtils.isBlank(host.getMac()) || host.getMac().equals(dev.mac);
+					if (ipMatch && macMatch) {
+						return true;
+					}
+				}
+			}
+		} else {// 不验证mac 和 ip
+			return true;
+		}
 
+		return false;
 	}
 
 	public static String getCaCertData() {

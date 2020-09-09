@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.Charset;
+import java.security.Key;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -29,13 +30,38 @@ import org.bouncycastle.openssl.PEMParser;
  */
 public class CertUtils {
 	// 加密算法
-	public static final String ENCRYPT_ALGORITHM = "SHA256withRSA";
+	public static final String ENCRYPT_ALGORITHM = "RSA";
 	// 签名算法
 	public static final String SIGNATURE_ALGORITHM = "MD5withRSA";
 
 	public static final String SIGN = System.getProperty("line.separator");
 
+	/**
+	 * 读取证书
+	 * 
+	 * @param pemFile
+	 * @return
+	 */
 	public static X509Certificate getCertFromPemFile(File pemFile) {
+		Reader reader = null;
+		try {
+			reader = new FileReader(pemFile);
+			return parseCert(reader);
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("读取证书失败");
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					// ingnore quietly
+				}
+			}
+		}
+
+	}
+
+	public static X509Certificate getKeyFromPemFile(File pemFile) {
 		Reader reader = null;
 		try {
 			reader = new FileReader(pemFile);
@@ -88,7 +114,7 @@ public class CertUtils {
 
 	}
 
-	public static String encrypt(PrivateKey privateKey, String plaintext) {
+	public static String encrypt(Key privateKey, String plaintext) {
 		try {
 
 			Cipher cipher = Cipher.getInstance(ENCRYPT_ALGORITHM);
@@ -103,7 +129,7 @@ public class CertUtils {
 
 	}
 
-	public static String decrypt(PublicKey publicKey, String ciphertext) {
+	public static String decrypt(Key publicKey, String ciphertext) {
 		try {
 			byte[] data = Base64.getDecoder().decode(ciphertext.getBytes("UTF-8"));
 
@@ -119,7 +145,7 @@ public class CertUtils {
 
 	}
 
-	public static byte[] decrypt(PublicKey publicKey, byte[] data) {
+	public static byte[] decrypt(Key publicKey, byte[] data) {
 		try {
 
 			Cipher cipher = Cipher.getInstance(ENCRYPT_ALGORITHM);
@@ -154,7 +180,7 @@ public class CertUtils {
 		}
 
 	}
-	
+
 	public static void checkValidity(X509Certificate cert) {
 		try {
 			cert.checkValidity();

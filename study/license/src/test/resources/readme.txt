@@ -25,5 +25,5 @@ keytool -printcert -file hnu.pem -v
 keytool -importcert -alias hnu -file hnu.pem -keystore bridge.jks -storepass 123456
 
 #导出私钥
-keytool -importcert -alias hnu -file hnu.pem -keystore bridge.jks -storepass 123456
+
 

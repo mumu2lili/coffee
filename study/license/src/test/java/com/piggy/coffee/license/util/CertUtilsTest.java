@@ -5,6 +5,8 @@ import java.security.cert.X509Certificate;
 
 import org.junit.Test;
 
+import com.piggy.coffee.license.mgr.LicenseMgr;
+
 public class CertUtilsTest {
 
 	@Test
@@ -12,8 +14,8 @@ public class CertUtilsTest {
 
 		String path = "D:\\work\\eclipse-workspace\\zs\\hnu.pem";
 		String caCertPath = "D:\\work\\eclipse-workspace\\zs\\bridge.pem";
-		X509Certificate cert = CertUtils.readCertFromPemFile(new File(path));
-		X509Certificate caCert = CertUtils.readCertFromPemFile(new File(caCertPath));
+		X509Certificate cert = CertUtils.getCertFromPemFile(new File(path));
+		X509Certificate caCert = CertUtils.getCertFromPemFile(new File(caCertPath));
 		CertUtils.verifyCert(cert, caCert);
 	}
 
@@ -21,8 +23,11 @@ public class CertUtilsTest {
 	public void testVerifyCert2() {
 
 		String path = "D:\\work\\eclipse-workspace\\zs\\hnu.pem";
-		X509Certificate cert = CertUtils.readCertFromPemFile(new File(path));
-		X509Certificate caCert = CertUtils.readCaCert();
+		X509Certificate cert = CertUtils.getCertFromPemFile(new File(path));
+
+		String caCertData = LicenseMgr.getCaCertData();
+		X509Certificate caCert = CertUtils.parseCert(caCertData);
+
 		CertUtils.verifyCert(cert, caCert);
 	}
 }

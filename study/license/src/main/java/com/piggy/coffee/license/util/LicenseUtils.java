@@ -40,4 +40,31 @@ public class LicenseUtils {
 
 		return lic;
 	}
+
+	// 当前未加入自定义信息，无需要私钥
+	// 证书为 pem格式
+	public static void createLicense(String certPath) {
+		// BridgeGrantInfo to json 并且加密，暂无
+
+		//
+		File file = new File(certPath);
+		List<String> lines = null;
+		try {
+			lines = FileUtils.readLines(file, "UTF-8");
+		} catch (IOException e) {
+			throw new RuntimeException("读取许可失败", e);
+		}
+		lines.remove(0); // 去掉 begin
+		lines.remove(lines.size() - 1); // 去掉 end
+
+		String licPath = file.getParentFile().getAbsolutePath();
+		licPath = licPath + File.separator + "bridge.lic";
+		
+		File licFile = new File(licPath);
+		try {
+			FileUtils.writeLines(licFile, lines);
+		} catch (IOException e) {
+			throw new RuntimeException("写许可文件失败", e);
+		}
+	}
 }

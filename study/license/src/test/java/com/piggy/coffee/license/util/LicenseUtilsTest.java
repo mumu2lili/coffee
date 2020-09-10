@@ -20,7 +20,7 @@ public class LicenseUtilsTest {
 		
 		BridgeGrantInfo info = new BridgeGrantInfo();
 		BridgeHost host = new BridgeHost();
-		host.setIp("192.168.2.49");
+		host.setIp("192.168.2.50");
 		host.setMac("98-3B-8F-82-9B-55");
 		info.addBridgeHost(host);
 		

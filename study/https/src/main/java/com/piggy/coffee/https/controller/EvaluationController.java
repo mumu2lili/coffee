@@ -1,5 +1,6 @@
 package com.piggy.coffee.https.controller;
 
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -26,8 +27,8 @@ public class EvaluationController {
 	}
 
 	@GetMapping("/{tpiID}/result")
-	public ApiResult<Integer> test(@PathVariable("tpiID") String tpiID) {
-		ApiResult<Integer> r = new ApiResult<>();
+	public ApiResult<String> test(@PathVariable("tpiID") String tpiID) {
+		ApiResult<String> r = new ApiResult<>();
 
 		Integer i = map.get(tpiID);
 		if (i == null) {
@@ -36,13 +37,13 @@ public class EvaluationController {
 			i += 1;
 		}
 		map.put(tpiID, i);
-		r.setData(i);
+		r.setMsg(i.toString());
 
-		if (i < 10) {
-			r.setMsg("NO");
-		} else {
+		if (i >= 10) {
 			map.remove(tpiID);
-			r.setMsg("YES");
+			Random random = new Random(System.currentTimeMillis());
+			String s = random.nextInt() % 2 == 0 ? "YES" : "NO";
+			r.setData(s);
 		}
 
 		return r;

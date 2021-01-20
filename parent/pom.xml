@@ -29,7 +29,7 @@
 		<!-- spring cloud -->
 		<cloud.version>Edgware.SR4</cloud.version>
 		<!-- -->
-		<jackson.version>2.9.3</jackson.version>
+		<jackson.version>2.12.1</jackson.version>
 		<cxf.version>3.0.3</cxf.version>
 		<jax.ws.rs>2.0.1</jax.ws.rs>
 		<taglibs.version>1.1.2</taglibs.version>

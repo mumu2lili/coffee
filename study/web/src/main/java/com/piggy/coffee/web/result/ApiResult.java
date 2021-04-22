@@ -1,6 +1,7 @@
 package com.piggy.coffee.web.result;
 
-public class WebResult<T> {
+public class ApiResult<T> {
+	int code = 0;
 
 	private String msg = "ok";
 
@@ -24,4 +25,13 @@ public class WebResult<T> {
 		this.body = body;
 	}
 
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	
 }

@@ -7,12 +7,14 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 import com.piggy.coffee.web.filter.InjectionAttackFilter;
 import com.piggy.coffee.web.listener.ContextPathListener;
 
+@EnableScheduling 
 @Configuration
 @SpringBootApplication
 public class CoffeeWebApplication {

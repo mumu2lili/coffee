@@ -18,7 +18,7 @@
 		</encoder>
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logs/bridge.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/var/log/apps/web.%d{yyyy-MM-dd}.log</fileNamePattern>
 		</rollingPolicy>
 	</appender>
 

@@ -2,10 +2,26 @@
 <configuration>
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
+		<!-- <encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 			</pattern>
-		</encoder>
+		</encoder> -->
+		
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
+                <pattern>
+                    <pattern>
+                        {
+                        "date":"%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                        "level":"%-5level",
+                        "logger":"%logger{36}",
+                        "msg":"%msg"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+		
 	</appender>
 
 	<appender name="web"
@@ -13,9 +29,24 @@
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>INFO</level>
 		</filter>
-		<encoder>
-			<pattern>%msg%n</pattern>
-		</encoder>
+<!-- 		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder> -->
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers class="net.logstash.logback.composite.loggingevent.LoggingEventJsonProviders">
+                <pattern>
+                    <pattern>
+                        {
+                        "date":"%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                        "level":"%-5level",
+                        "logger":"%class:%line",
+                        "msg":"%msg"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+		
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>/var/log/apps/web.%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -23,7 +54,7 @@
 	</appender>
 
 	<root level="info">
-<!-- 		<appender-ref ref="STDOUT" /> -->
+		<appender-ref ref="STDOUT" /> 
 		<appender-ref ref="web" />
 	</root>
 

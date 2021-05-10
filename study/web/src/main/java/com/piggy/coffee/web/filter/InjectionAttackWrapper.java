@@ -9,8 +9,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 public class InjectionAttackWrapper extends HttpServletRequestWrapper {
 
 	boolean filterXSS = true;

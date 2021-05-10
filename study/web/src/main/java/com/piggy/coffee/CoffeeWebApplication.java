@@ -34,8 +34,8 @@ public class CoffeeWebApplication {
 	}
 	
 	@Bean
-	public FilterRegistrationBean registerFilter1() {
-		FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
+	public FilterRegistrationBean<CharacterEncodingFilter> registerFilter1() {
+		FilterRegistrationBean<CharacterEncodingFilter> filterRegBean = new FilterRegistrationBean<CharacterEncodingFilter>();
 		filterRegBean.setFilter(new CharacterEncodingFilter());
 		filterRegBean.setName("characterEncodingFilter");
 		filterRegBean.addUrlPatterns("/*");
@@ -45,8 +45,8 @@ public class CoffeeWebApplication {
 	}
 	
 	@Bean
-	public FilterRegistrationBean registerFilter2() {
-		FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
+	public FilterRegistrationBean<InjectionAttackFilter> registerFilter2() {
+		FilterRegistrationBean<InjectionAttackFilter> filterRegBean = new FilterRegistrationBean<InjectionAttackFilter>();
 		filterRegBean.setFilter(new InjectionAttackFilter());
 		filterRegBean.setName("injectionAttackFilter");
 		filterRegBean.addUrlPatterns("/*");
@@ -57,8 +57,8 @@ public class CoffeeWebApplication {
 
 
 	//@Bean
-	public FilterRegistrationBean registerFilter3() {
-		FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
+	public FilterRegistrationBean<DelegatingFilterProxy> registerFilter3() {
+		FilterRegistrationBean<DelegatingFilterProxy> filterRegBean = new FilterRegistrationBean<DelegatingFilterProxy>();
 		filterRegBean.setFilter(new DelegatingFilterProxy());
 		filterRegBean.setName("shiroFilter");
 		filterRegBean.addUrlPatterns("/*");

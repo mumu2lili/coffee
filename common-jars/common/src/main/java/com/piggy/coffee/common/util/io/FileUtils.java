@@ -1,9 +1,12 @@
 package com.piggy.coffee.common.util.io;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
+
+import exception.CoffeeException;
 
 public final class FileUtils {
 
@@ -48,6 +51,14 @@ public final class FileUtils {
 			}
 		}
 
+	}
+
+	public static void writeFile(File file, String data) {
+		try {
+			org.apache.commons.io.FileUtils.writeStringToFile(file, data, "UTF8", false);
+		} catch (IOException e) {
+			throw new CoffeeException(e);
+		}
 	}
 
 }

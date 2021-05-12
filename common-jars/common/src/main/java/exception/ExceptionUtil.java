@@ -1,4 +1,4 @@
-package com.piggy.coffee.common.util.exception;
+package exception;
 
 public final class ExceptionUtil {
 

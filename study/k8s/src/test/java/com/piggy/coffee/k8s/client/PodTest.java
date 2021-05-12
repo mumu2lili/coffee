@@ -1,4 +1,4 @@
-package com.piggy.coffee.k8s;
+package com.piggy.coffee.k8s.client;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.piggy.coffee.k8s;
+package com.piggy.coffee.k8s.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.piggy.coffee.k8s.ShellExecTimeManager;
+
 import io.fabric8.kubernetes.api.model.DoneablePod;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
@@ -17,8 +19,8 @@ import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
 import okhttp3.Response;
 
-public class ExecTimoutTest extends ClientTimeoutTest {
-	private Logger logger = LoggerFactory.getLogger(ExecTimoutTest.class);
+public class ExecTest3 extends ClientTest {
+	private Logger logger = LoggerFactory.getLogger(ExecTest3.class);
 
 	@Test
 	public void test() throws InterruptedException {
@@ -39,20 +41,21 @@ public class ExecTimoutTest extends ClientTimeoutTest {
 			PipedOutputStream pos = new PipedOutputStream(pis);
 			PodResource<Pod, DoneablePod> podResource = client.pods().inNamespace("default").withName("hello");
 			ExecWatch watch = podResource.readingInput(in).writingOutput(pos)//.withTTY()// 不能有tty
-					.usingListener(new SimpleListener(pos, "hello")).exec("bash", "-c", " bash " + scriptPth);
+					.usingListener(new SimpleListener(pos, "hello")).exec("bash", "-c", "timeout 30 bash " + scriptPth);
 
 			// watch.close();
-		    manager.putExecTime(watch, 5);
+			// manager.putExecTime(watch, 10);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(pis));
+			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
 				logger.info(line);
-
+				sb.append(line);
+				sb.append(System.getProperty("line.separator"));
 				// Thread.sleep(5000);
 			}
-			logger.info(line);
 
-		//	watch.close();
+			watch.close();
 
 		} catch (IOException e) {// 执行繁忙
 			logger.error("执行繁忙", e);

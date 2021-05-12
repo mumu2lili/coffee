@@ -1,4 +1,4 @@
-package com.piggy.coffee.k8s;
+package com.piggy.coffee.k8s.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,18 +10,17 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.piggy.coffee.k8s.ShellExecTimeManager;
+
 import io.fabric8.kubernetes.api.model.DoneablePod;
 import io.fabric8.kubernetes.api.model.Pod;
-import io.fabric8.kubernetes.client.Config;
-import io.fabric8.kubernetes.client.ConfigBuilder;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
 import okhttp3.Response;
 
-public class ExecTest302 extends ClientTimeoutTest {
-	private Logger logger = LoggerFactory.getLogger(ExecTest302.class);
+public class ExecTimoutTest extends ClientTimeoutTest {
+	private Logger logger = LoggerFactory.getLogger(ExecTimoutTest.class);
 
 	@Test
 	public void test() throws InterruptedException {
@@ -41,24 +40,21 @@ public class ExecTest302 extends ClientTimeoutTest {
 			PipedInputStream pis = new PipedInputStream();
 			PipedOutputStream pos = new PipedOutputStream(pis);
 			PodResource<Pod, DoneablePod> podResource = client.pods().inNamespace("default").withName("hello");
-			ExecWatch watch = podResource.readingInput(in).writingOutput(pos).withTTY()
-					.usingListener(new SimpleListener(pos, "hello")).exec("bash", scriptPth);
+			ExecWatch watch = podResource.readingInput(in).writingOutput(pos)//.withTTY()// 不能有tty
+					.usingListener(new SimpleListener(pos, "hello")).exec("bash", "-c", " bash " + scriptPth);
 
-			// manager.putExecTime(watch, 10);
+			// watch.close();
+		    manager.putExecTime(watch, 5);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(pis));
-			StringBuilder sb = new StringBuilder();
 			String line;
 			while ((line = reader.readLine()) != null) {
 				logger.info(line);
-				sb.append(line);
-				if(line.startsWith("c")) {
-					throw new RuntimeException("e!!!!!!!!!!!!");
-				}
-				sb.append(System.getProperty("line.separator"));
+
 				// Thread.sleep(5000);
 			}
+			logger.info(line);
 
-			watch.close();
+		//	watch.close();
 
 		} catch (IOException e) {// 执行繁忙
 			logger.error("执行繁忙", e);
@@ -115,7 +111,5 @@ public class ExecTest302 extends ClientTimeoutTest {
 			}
 		}
 	}
-	
-
 
 }

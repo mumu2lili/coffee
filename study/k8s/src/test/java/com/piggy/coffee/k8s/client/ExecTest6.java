@@ -1,4 +1,4 @@
-package com.piggy.coffee.k8s;
+package com.piggy.coffee.k8s.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,11 +10,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.piggy.coffee.k8s.ShellExecTimeManager;
+
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import okhttp3.Response;
 
-public class ExecTest5 extends ClientTest {
+public class ExecTest6 extends ClientTest {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Test
@@ -32,10 +34,11 @@ public class ExecTest5 extends ClientTest {
 			PipedOutputStream pos = new PipedOutputStream(pis);
 
 			String ins = "\"IA==\"";
-			ins = "IA==,IA==";
+			ins = "5aum5ailCjM1MDAK5aWzCjQ1LjUK5pyI55CD5bm/5a+S5a6rCuWQpg==";
 			ExecWatch watch = client.pods().inNamespace("default").withName("mypodb")
 					.readingInput(new PipedInputStream()).writingOutput(pos).withTTY()
-					.usingListener(new SimpleListener(pos)).exec("bash", scriptPth, 3 + "", ins);
+					.usingListener(new SimpleListener(pos))
+					.exec("bash", "-c", "bash " + scriptPth + " " + 3 + " " + ins);
 
 			manager.putExecTime(watch, 10);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(pis));

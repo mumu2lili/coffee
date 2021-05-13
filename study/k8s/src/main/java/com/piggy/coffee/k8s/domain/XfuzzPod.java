@@ -13,6 +13,26 @@ public class XfuzzPod {
 	 */
 	private String containerName;
 
+	/**
+	 * 配置目录在主机上的路径
+	 */
+	private String configDirHostPath;
+
+	/**
+	 * 配置目录在容器中的路径
+	 */
+	private String configDirContainerPath;
+
+	/**
+	 * 种子目录在主机上的路径
+	 */
+	private String seedDirHostPath;
+
+	/**
+	 * 种子目录在主机上的路径
+	 */
+	private String seedDirContainerPath;
+
 	public String getNamespace() {
 		return namespace;
 	}
@@ -48,7 +68,45 @@ public class XfuzzPod {
 		return containerName;
 	}
 
-	public void setContainerName(String containerName) {
+	public XfuzzPod setContainerName(String containerName) {
 		this.containerName = containerName;
+		return this;
 	}
+
+	public String getConfigDirHostPath() {
+		return configDirHostPath;
+	}
+
+	public XfuzzPod setConfigDirHostPath(String configDirHostPath) {
+		this.configDirHostPath = configDirHostPath;
+		return this;
+	}
+
+	public String getConfigDirContainerPath() {
+		return configDirContainerPath;
+	}
+
+	public XfuzzPod setConfigDirContainerPath(String configDirContainerPath) {
+		this.configDirContainerPath = configDirContainerPath;
+		return this;
+	}
+
+	public String getSeedDirHostPath() {
+		return seedDirHostPath;
+	}
+
+	public XfuzzPod setSeedDirHostPath(String seedDirHostPath) {
+		this.seedDirHostPath = seedDirHostPath;
+		return this;
+	}
+
+	public String getSeedDirContainerPath() {
+		return seedDirContainerPath;
+	}
+
+	public XfuzzPod setSeedDirContainerPath(String seedDirContainerPath) {
+		this.seedDirContainerPath = seedDirContainerPath;
+		return this;
+	}
+
 }

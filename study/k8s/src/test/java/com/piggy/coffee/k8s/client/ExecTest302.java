@@ -12,11 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.piggy.coffee.k8s.ShellExecTimeManager;
 
-import io.fabric8.kubernetes.api.model.DoneablePod;
 import io.fabric8.kubernetes.api.model.Pod;
-import io.fabric8.kubernetes.client.Config;
-import io.fabric8.kubernetes.client.ConfigBuilder;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
@@ -42,7 +38,7 @@ public class ExecTest302 extends ClientTimeoutTest {
 			PipedInputStream in = new PipedInputStream();
 			PipedInputStream pis = new PipedInputStream();
 			PipedOutputStream pos = new PipedOutputStream(pis);
-			PodResource<Pod, DoneablePod> podResource = client.pods().inNamespace("default").withName("hello");
+			PodResource<Pod> podResource = client.pods().inNamespace("default").withName("hello");
 			ExecWatch watch = podResource.readingInput(in).writingOutput(pos).withTTY()
 					.usingListener(new SimpleListener(pos, "hello")).exec("bash", scriptPth);
 

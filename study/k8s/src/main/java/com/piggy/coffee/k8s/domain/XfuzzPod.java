@@ -8,6 +8,11 @@ public class XfuzzPod {
 
 	private String image;
 
+	/**
+	 * 默认取 image 名称部分
+	 */
+	private String containerName;
+
 	public String getNamespace() {
 		return namespace;
 	}
@@ -32,7 +37,18 @@ public class XfuzzPod {
 
 	public XfuzzPod setImage(String image) {
 		this.image = image;
+
+		if (this.containerName == null) {
+			this.containerName = image.substring(0, image.indexOf(":"));
+		}
 		return this;
 	}
 
+	public String getContainerName() {
+		return containerName;
+	}
+
+	public void setContainerName(String containerName) {
+		this.containerName = containerName;
+	}
 }

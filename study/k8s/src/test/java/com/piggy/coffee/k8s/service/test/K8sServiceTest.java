@@ -18,7 +18,7 @@ public class K8sServiceTest {
 
 	@Test
 	public void testCreatePod() {
-		XfuzzPod xPod = new XfuzzPod().setName("hello").setImage("ubuntu:18.04");
+		XfuzzPod xPod = new XfuzzPod().setName("hi").setImage("hi:v1.0");
 
 		k8sService.createPod(xPod);
 	}

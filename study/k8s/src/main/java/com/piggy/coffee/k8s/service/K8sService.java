@@ -7,6 +7,8 @@ import com.piggy.coffee.k8s.domain.K8sClientConfig;
 import com.piggy.coffee.k8s.domain.XfuzzPod;
 import com.piggy.coffee.k8s.util.K8sClientUtils;
 
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.client.KubernetesClient;
 
 @Service
@@ -18,10 +20,11 @@ public class K8sService {
 
 		KubernetesClient client = K8sClientUtils.getClient(k8sClientConfig);
 
-		client.pods().inNamespace(xPod.getNamespace()).createOrReplaceWithNew().withNewMetadata()
-				.withName(xPod.getName()).endMetadata().withNewSpec().addNewContainer().withImage(xPod.getImage())
-				.endContainer().endSpec().done();
-		
+		Pod pod = new PodBuilder().withNewMetadata().withName(xPod.getName()).endMetadata().withNewSpec()
+				.addNewContainer().withName(xPod.getContainerName()).withImage(xPod.getImage())
+				.addNewCommand("start.sh").endContainer().endSpec().build();
+		client.pods().inNamespace(xPod.getNamespace()).create(pod);
+
 		System.out.print("aa");
 
 	}

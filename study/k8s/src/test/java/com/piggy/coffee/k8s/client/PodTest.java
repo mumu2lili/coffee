@@ -8,8 +8,6 @@ import org.junit.Test;
 
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodList;
-import io.fabric8.kubernetes.client.Watch;
-import io.fabric8.kubernetes.client.Watcher;
 import io.fabric8.kubernetes.client.dsl.Deletable;
 import io.fabric8.kubernetes.client.dsl.FilterWatchListDeletable;
 
@@ -25,7 +23,7 @@ public class PodTest extends ClientTest {
 
 	private Pod getPod(Map<String, String> inLabels, Map<String, String> outLabels) {
 		// 加上所有key in values的筛选条件
-		FilterWatchListDeletable<Pod, PodList, Boolean, Watch, Watcher<Pod>> filteredPodList = null;
+		FilterWatchListDeletable<Pod, PodList> filteredPodList = null;
 		for (Map.Entry<String, String> label : inLabels.entrySet()) {
 			if (filteredPodList == null) {
 				filteredPodList = client.pods().inNamespace("default").withLabelIn(label.getKey(), label.getValue());
@@ -66,13 +64,13 @@ public class PodTest extends ClientTest {
 
 	@Test
 	public void testDelete() {
-		Deletable<Boolean> d = client.pods().inNamespace("default").withName("mypodb").withGracePeriod(0);
+		Deletable d = client.pods().inNamespace("default").withName("mypodb").withGracePeriod(0);
 		d.delete();
 	}
 
 	@Test
 	public void testDelete2() {
-		Deletable<Boolean> d = client.pods().inNamespace("default").withName("mypodb");
+		Deletable d = client.pods().inNamespace("default").withName("mypodb");
 		d.delete();
 	}
 

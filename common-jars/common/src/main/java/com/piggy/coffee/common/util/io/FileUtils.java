@@ -61,4 +61,11 @@ public final class FileUtils {
 		}
 	}
 
+	public static void writeFile(File file, byte[] data) {
+		try {
+			org.apache.commons.io.FileUtils.writeByteArrayToFile(file, data);
+		} catch (IOException e) {
+			throw new CoffeeException(e);
+		}
+	}
 }

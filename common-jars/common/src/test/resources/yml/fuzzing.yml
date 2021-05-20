@@ -1,0 +1,33 @@
+fuzzers:
+- aflfuzz
+fuzzing:
+  advanced_settings:
+    crash_exploration_mode: false
+    env: |-
+      AFL_NO_AFFINITY=1
+      AFL_SKIP_CRASHES = 1
+      AFL_IMPORT_FIRST = 1
+      #AFL_SKIP_CPUFREQ = 1
+      #AFL_NO_FORKSRV = 1
+      #AFL_EXIT_WHEN_DONE = 1
+      #AFL_NO_ARITH = 1
+      #AFL_SHUFFLE_QUEUE = 1
+      #AFL_SKIP_BIN_CHECK = 1
+      #AFL_DUMB_FORKSRV = 1
+      #AFL_POST_LIBRARY = /path/to / postprocess.so
+      #AFL_FAST_CAL = 1
+      #AFL_PRELOAD = /path/to / library
+      #AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES = 1
+    fuzz_dict: ""
+    fuzz_inpath: /xfuzz_work/{XFUZZ_FORMAT_STR}/in
+    fuzz_memlimit: 8
+    fuzz_timeout: 3000
+    fuzzing_mode: 0
+    parallel: 4
+    quick_mode: true
+  fuzz_cmd: fuzzgoat @@
+  seed_type: json
+run_token: eb366ee2ca9e456fb6ebcf6cb01af555
+target:
+  target_name: fuzzgoat_i
+  version: 0.1.0

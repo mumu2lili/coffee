@@ -29,7 +29,7 @@ public class ShellExecTest extends ClientTest {
 		LineCallBack callBack = new LineCallBack();
 		ShellExeResult result = ShellUtils.executeAndGetExitStatus(command, callBack);
 		logger.info(result.getOut());
-		logger.info("exitCode:" + result.getExitStatus());
+		logger.info("exitCode:" + result.getExitCode());
 
 	}
 

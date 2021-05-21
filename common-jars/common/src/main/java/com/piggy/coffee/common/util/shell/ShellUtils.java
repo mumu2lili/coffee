@@ -33,7 +33,7 @@ public final class ShellUtils {
 
 		for (int i = 0; i < retryTimes; i++) {
 			result = executeAndGetExitStatus(command);
-			if (result.getExitStatus() != 0) {
+			if (result.getExitCode() != 0) {
 				continue;
 			} else {
 				break;
@@ -70,7 +70,7 @@ public final class ShellUtils {
 		}
 
 		result.setOut(out.toString().trim());
-		result.setExitStatus(exitStatus);
+		result.setExitCode(exitStatus);
 
 		return result;
 	}
@@ -100,7 +100,7 @@ public final class ShellUtils {
 		}
 
 		result.setOut(out.toString().trim());
-		result.setExitStatus(exitStatus);
+		result.setExitCode(exitStatus);
 
 		return result;
 	}

@@ -2,7 +2,7 @@ package com.piggy.coffee.common.util.shell;
 
 public class ShellExeResult {
 	private String out;
-	private Integer exitStatus;
+	private int exitCode;
 
 	public String getOut() {
 		return out;
@@ -12,12 +12,14 @@ public class ShellExeResult {
 		this.out = out;
 	}
 
-	public Integer getExitStatus() {
-		return exitStatus;
+	public int getExitCode() {
+		return exitCode;
 	}
 
-	public void setExitStatus(Integer exitStatus) {
-		this.exitStatus = exitStatus;
+	public void setExitCode(int exitCode) {
+		this.exitCode = exitCode;
 	}
+
+
 
 }

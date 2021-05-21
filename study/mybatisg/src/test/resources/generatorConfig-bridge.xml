@@ -8,27 +8,27 @@
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.56.101:3306/testbridge"
-			userId="root" password="123456" />
+			connectionURL="jdbc:mysql://192.169.0.15:3306/xfuzz"
+			userId="xfuzz" password="xfuzz" />
 		<!-- 生成模型的包名和位置 -->
 		<javaModelGenerator
-			targetPackage="com.educoder.bridge.sys.model"
+			targetPackage="com.ubisec.xfuzz.task.entity"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaModelGenerator>
 		<!-- 生成的映射文件报名和位置 -->
-		<sqlMapGenerator targetPackage="mapper.sys"
+		<sqlMapGenerator targetPackage="mapper.task"
 			targetProject="src/main/resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
 		<javaClientGenerator
-			targetPackage="com.educoder.bridge.sys.dao"
+			targetPackage="com.ubisec.xfuzz.task.mapper"
 			targetProject="src/main/java" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
-		<table tableName="cluster_config" domainObjectName="ClusterConfig"
+		<table tableName="task_run_queue" domainObjectName="TaskRunQueue"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

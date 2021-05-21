@@ -8,11 +8,7 @@ public class TmpTest {
 
 	@Test
 	public void test() {
-	    long sum = 0;
-	    for(int i = 10 - 1; i > 0; i--) {
-	    	sum += i;
-	    }
-	    System.out.println(sum);
+		String s = "2021-05-21T06:48:13Z";
 	}
 
 	@Test

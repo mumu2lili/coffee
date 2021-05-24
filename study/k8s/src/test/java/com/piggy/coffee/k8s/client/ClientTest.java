@@ -9,7 +9,7 @@ import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
 
 public class ClientTest {
-	KubernetesClient client = null;
+	protected KubernetesClient client = null;
 
 	@Before
 	public void setUp() throws Exception {

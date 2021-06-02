@@ -1,6 +1,6 @@
 package com.piggy.coffee.k8s.domain;
 
-public class XfuzzPod {
+public class CoffeePod {
 
 	private String namespace = "default";
 
@@ -37,7 +37,7 @@ public class XfuzzPod {
 		return namespace;
 	}
 
-	public XfuzzPod setNamespace(String namespace) {
+	public CoffeePod setNamespace(String namespace) {
 		this.namespace = namespace;
 		return this;
 	}
@@ -46,7 +46,7 @@ public class XfuzzPod {
 		return name;
 	}
 
-	public XfuzzPod setName(String name) {
+	public CoffeePod setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -55,7 +55,7 @@ public class XfuzzPod {
 		return image;
 	}
 
-	public XfuzzPod setImage(String image) {
+	public CoffeePod setImage(String image) {
 		this.image = image;
 
 		if (this.containerName == null) {
@@ -68,7 +68,7 @@ public class XfuzzPod {
 		return containerName;
 	}
 
-	public XfuzzPod setContainerName(String containerName) {
+	public CoffeePod setContainerName(String containerName) {
 		this.containerName = containerName;
 		return this;
 	}
@@ -77,7 +77,7 @@ public class XfuzzPod {
 		return configDirHostPath;
 	}
 
-	public XfuzzPod setConfigDirHostPath(String configDirHostPath) {
+	public CoffeePod setConfigDirHostPath(String configDirHostPath) {
 		this.configDirHostPath = configDirHostPath;
 		return this;
 	}
@@ -86,7 +86,7 @@ public class XfuzzPod {
 		return configDirContainerPath;
 	}
 
-	public XfuzzPod setConfigDirContainerPath(String configDirContainerPath) {
+	public CoffeePod setConfigDirContainerPath(String configDirContainerPath) {
 		this.configDirContainerPath = configDirContainerPath;
 		return this;
 	}
@@ -95,7 +95,7 @@ public class XfuzzPod {
 		return seedDirHostPath;
 	}
 
-	public XfuzzPod setSeedDirHostPath(String seedDirHostPath) {
+	public CoffeePod setSeedDirHostPath(String seedDirHostPath) {
 		this.seedDirHostPath = seedDirHostPath;
 		return this;
 	}
@@ -104,7 +104,7 @@ public class XfuzzPod {
 		return seedDirContainerPath;
 	}
 
-	public XfuzzPod setSeedDirContainerPath(String seedDirContainerPath) {
+	public CoffeePod setSeedDirContainerPath(String seedDirContainerPath) {
 		this.seedDirContainerPath = seedDirContainerPath;
 		return this;
 	}

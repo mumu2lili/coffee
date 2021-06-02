@@ -16,6 +16,8 @@ public class K8sClientConfig implements K8sClientConfigIf {
 	private String clientCertData;
 	@Value("${k8s.clientKeyData}")
 	private String clientKeyData;
+	@Value("${k8s.kubeConfig}")
+	private String kubeConfig;
 
 	@Override
 	public String getMasterUr() {
@@ -35,6 +37,11 @@ public class K8sClientConfig implements K8sClientConfigIf {
 	@Override
 	public String getClientKeyData() {
 		return clientKeyData;
+	}
+
+	@Override
+	public String getKubeConfig() {
+		return kubeConfig;
 	}
 
 }

@@ -8,4 +8,6 @@ public interface K8sClientConfigIf {
 	String getClientCertData();
 
 	String getClientKeyData();
+	
+	String getKubeConfig();
 }

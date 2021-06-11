@@ -9,11 +9,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling 
 @Configuration
 @SpringBootApplication
-public class CoffeeWebApplication {
+public class CoffeeK8sApplication {
 
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(CoffeeWebApplication.class).web(WebApplicationType.SERVLET).run(args);
+		new SpringApplicationBuilder(CoffeeK8sApplication.class).web(WebApplicationType.SERVLET).run(args);
 	}
 
 	

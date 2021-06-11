@@ -59,6 +59,9 @@
 		
 		<module>study/k8s</module>
 		<module>study/k8sclient</module>
+		<module>study/harbor</module>
+		
+		
 		<module>study/logtool</module>
 		<module>study/deadcycle</module>
 		<module>study/compiler</module>

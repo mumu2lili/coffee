@@ -1,14 +1,12 @@
 package com.piggy.coffee.tmp;
 
-import java.util.UUID;
-
 import org.junit.Test;
 
 public class TmpTest {
 
 	@Test
 	public void test() {
-		String s = "2021-05-21T06:48:13Z";
+
 	}
 
 	@Test
@@ -19,7 +17,7 @@ public class TmpTest {
 		double d2 = Math.abs(6 * Math.pow(2.71828183, 4.377021) - 113 * 4.377021 + 17);
 		System.out.println(d);
 		System.out.println(d2);
-		
+
 		System.out.println(Math.abs(d) < 0.00001);
 		System.out.println(Math.abs(d2) < 0.00001);
 	}
@@ -32,6 +30,15 @@ public class TmpTest {
 		double d2 = Math.abs(6 * Math.pow(2.718281828459045, 4.377021) - 113 * 4.377021 + 17);
 		System.out.println(d);
 		System.out.println(d2);
+	}
+
+	@Test
+	public void testHouse() {
+		int years = 50;
+		double perYear = 80 * Math.pow(1.05, years) / years;
+		double perMonth = perYear / 12;
+		System.out.println("每年花费：" + perYear);
+		System.out.println("每月花费：" + perMonth);
 	}
 
 }

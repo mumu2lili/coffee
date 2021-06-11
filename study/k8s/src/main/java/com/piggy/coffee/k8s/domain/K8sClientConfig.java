@@ -16,7 +16,7 @@ public class K8sClientConfig implements K8sClientConfigIf {
 	private String clientCertData;
 	@Value("${k8s.clientKeyData}")
 	private String clientKeyData;
-	@Value("${k8s.kubeConfig}")
+	@Value("${k8s.kubeConfig:/root/.kube/config}")
 	private String kubeConfig;
 
 	@Override

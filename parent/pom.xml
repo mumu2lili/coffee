@@ -50,7 +50,7 @@
 		<logback.version>1.2.3</logback.version>
 
 		<!-- Testing dependencies -->
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<jmockit.version>1.33</jmockit.version>
 		<mockito-core.version>2.13.0</mockito-core.version>
 

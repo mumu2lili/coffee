@@ -1,13 +1,29 @@
 package com.piggy.coffee.tmp;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.junit.Test;
 
 public class TmpTest {
 
 	@Test
 	public void test() {
-
+		int COUNT_BITS = Integer.SIZE - 3;
+		System.out.println(COUNT_BITS);
+		int STOP = (-1 << COUNT_BITS);
+		
+		System.out.println(Integer.toBinaryString(STOP));
+		System.out.println(STOP);
+		
+		AtomicInteger ctl = new AtomicInteger(ctlOf(STOP, 0));
+		System.out.println(Integer.toBinaryString(ctl.get()));
+		System.out.println(ctl.get());
+		
+//		int CAPACITY = (1 << COUNT_BITS) - 1;
+//		System.out.println(Integer.toBinaryString(CAPACITY));
 	}
+	
+    private static int ctlOf(int rs, int wc) { return rs | wc; }
 
 	@Test
 	public void test2() {

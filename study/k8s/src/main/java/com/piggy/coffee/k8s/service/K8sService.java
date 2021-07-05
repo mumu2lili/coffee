@@ -37,7 +37,10 @@ public class K8sService {
 	        SpecNested<PodBuilder> specNested = pb.withNewSpec().addNewContainer().withName(K8sUtils.buildContainerName(cPod.getContainerName()))
 	                .withImage(cPod.getImage()).withResources(null).addNewVolumeMount().withName(K8sCsts.CONFIG_DIR)
 	                .withMountPath(K8sCsts.CONFIG_DIR_CONTAINER_PATH).endVolumeMount().addNewVolumeMount().withName(K8sCsts.SEED_DIR)
-	                .withMountPath(cPod.getSeedDirContainerPath()).endVolumeMount().addNewCommand("/xfuzz_work/scripts/start.sh")
+	                .withMountPath(cPod.getSeedDirContainerPath()).endVolumeMount()
+	                .addNewCommand("bash")
+	                .addNewCommand("-c")
+	                .addNewCommand("while true; do echo \"hello aaa\"; sleep 3; done")
 	                .withNewSecurityContext().withPrivileged(true).editOrNewCapabilities().addToAdd("SYS_PTRACE").endCapabilities().endSecurityContext()
 	                .endContainer();
 

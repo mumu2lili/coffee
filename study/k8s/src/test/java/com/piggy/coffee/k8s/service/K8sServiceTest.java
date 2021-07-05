@@ -20,11 +20,11 @@ public class K8sServiceTest {
 	public void testCreatePod() {
 		String configDirHostPath = String.format(K8sCsts.CONFIG_DIR_HOST_PATH, "1");
 
-		CoffeePod xPod = new CoffeePod().setName("hi").setImage("hi:v1.0")
+		CoffeePod cPod = new CoffeePod().setName("hi").setImage("192.168.56.104/library/hi:v1.0")
 				.setConfigDirContainerPath(K8sCsts.CONFIG_DIR_CONTAINER_PATH).setConfigDirHostPath(configDirHostPath)
 				.setSeedDirContainerPath(K8sCsts.SEED_DIR_CONTAINER_PATH)
 				.setSeedDirHostPath(K8sCsts.SEED_DIR_HOST_PATH);
 
-		k8sService.createPod(xPod);
+		k8sService.createPod(cPod);
 	}
 }
